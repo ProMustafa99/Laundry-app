@@ -61,10 +61,13 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: Text("Home Page"),
       ),
+     
       body: Column(
         children: [
+
           Container(
             height: 370.0,
+          
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: [

@@ -15,6 +15,7 @@ class Detailes extends StatefulWidget {
 }
 
 class _DetailesState extends State<Detailes> {
+ 
   int Tshirt = 0;
   double PrTshirt = 0.5;
   bool VTshirt = false;
@@ -55,6 +56,7 @@ class _DetailesState extends State<Detailes> {
         title: Text("Detailes Page"),
       
       ),
+    
       body: SingleChildScrollView(
         child: Container(
           child: Column(

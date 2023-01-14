@@ -1,4 +1,16 @@
-#Sat Jan 14 13:41:53 EET 2023
-base.0=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
+#Sat Jan 14 18:25:23 EET 2023
+path.4=8/classes.dex
+path.3=1/classes.dex
+path.2=0/classes.dex
+path.1=0/classes.dex
 path.0=classes.dex
+base.4=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
+base.3=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.2=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.1=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.0=/media/mustafa/space/test lun/flutter_application_1/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+renamed.4=classes5.dex

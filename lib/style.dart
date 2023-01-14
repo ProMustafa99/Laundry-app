@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,9 +26,11 @@ ThemeData light = ThemeData(
       elevation: 0.0
   ),
   scaffoldBackgroundColor: color_background,
+  
+  // ignore: prefer_const_constructors
   bottomNavigationBarTheme:BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.deepOrangeAccent,
+      selectedItemColor: Colors.blue,
       elevation: 40.0,
       backgroundColor: Colors.white
 
