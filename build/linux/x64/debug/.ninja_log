@@ -1,0 +1,28 @@
+# ninja log v5
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/libflutter_linux_gtk.so	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_engine.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_value.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/fl_view.h	157608043356d55e
+0	18665	0	/media/mustafa/space/test lun/flutter_application_1/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	157608043356d55e
+0	18665	0	flutter/_phony_	157608043356d55e
+18681	22261	1673723442051307718	CMakeFiles/flutter_application_1.dir/flutter/generated_plugin_registrant.cc.o	82803d6fcb97980a
+18680	22388	1673723442207306813	CMakeFiles/flutter_application_1.dir/main.cc.o	32246cec05cbe137
+18680	22434	1673723442255306535	CMakeFiles/flutter_application_1.dir/my_application.cc.o	5b99684a14072bb
+22434	22873	1673723442695303983	intermediates_do_not_run/flutter_application_1	5f18b6265ef5c29b
+22873	23481	0	CMakeFiles/install.util	a03b46841b205072

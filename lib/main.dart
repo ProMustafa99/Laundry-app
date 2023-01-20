@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/details.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/layout.dart';
-import 'package:flutter_application_1/order_page.dart';
 import 'package:flutter_application_1/style.dart';
+import 'package:flutter_application_1/Map/Map.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: light,
-      home: layout()
+      home: layout(),
     );
   }
 }

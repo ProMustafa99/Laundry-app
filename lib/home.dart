@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/details.dart';
+import 'package:flutter_application_1/Detailes/delails_dryclean.dart';
+import 'package:flutter_application_1/Detailes/details.dart';
+import 'package:flutter_application_1/model/order_model.dart';
 import 'package:flutter_application_1/widget.dart';
 
 class Home extends StatefulWidget {
@@ -30,8 +32,11 @@ class _HomeState extends State<Home> {
 
     return InkWell(
       onTap: () {
-       navigateto_page(context, Detailes());
-            
+        if (number_service == 1) {
+          navigateto_page(context, Detailes("Wash"));
+        } else if (number_service == 2) {
+          navigateto_page(context, Details_dry_clean("DryClean"));
+        }
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -61,13 +66,10 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: Text("Home Page"),
       ),
-     
       body: Column(
         children: [
-
           Container(
             height: 370.0,
-          
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: [
