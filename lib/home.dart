@@ -34,6 +34,8 @@ class _homeState extends State<Home> {
     else if (numsber_contant == 2) {
       setState(() {
         image = "assets/home_images/iron1.gif";
+
+        
         color = const Color(0xFF499AD4);
       });
     }
