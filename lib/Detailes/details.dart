@@ -4,8 +4,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/data_mangment/cubit_app.dart';
+import 'package:flutter_application_1/data_mangment/status_app.dart';
 import 'package:flutter_application_1/order/order_page.dart';
 import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Detailes extends StatefulWidget {
   String name_service;
@@ -17,7 +20,6 @@ class Detailes extends StatefulWidget {
 }
 
 class _DetailesState extends State<Detailes> {
-  
   String name_service;
   _DetailesState(this.name_service);
 
@@ -697,6 +699,7 @@ class _DetailesState extends State<Detailes> {
           child: Container(
               height: 80.0,
               width: double.maxFinite,
+              color: Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(

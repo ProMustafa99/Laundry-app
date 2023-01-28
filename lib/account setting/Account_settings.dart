@@ -16,77 +16,82 @@ class AccountSettings extends StatefulWidget {
 }
 
 class _AccountSettingsState extends State<AccountSettings> {
-
   Widget Settings(int number, String name) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: InkWell(
-      onTap: () {
-        if (number == 1) {
-          navigateto_page(context , account_info());
-        }
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: InkWell(
+        onTap: () {
+          if (number == 1) {
+            navigateto_page(context, account_info());
+          }
 
-        if (number == 2) {
-          navigateto_page(context , Change_email());
-          //Change_Passowrd
+          if (number == 2) {
+            navigateto_page(context, Change_email());
+            //Change_Passowrd
 
-        }
+          }
 
-        if (number == 3) {
-          navigateto_page(context , Change_Passowrd());
-        }
-      },
+          if (number == 3) {
+            navigateto_page(context, Change_Passowrd());
+          }
+        },
+        child: Container(
+          child: Row(
+            children: [
+              Text(
+                "${name}",
+                style: TextStyle(fontSize: 14),
+              ),
+              Spacer(),
 
-      child: Container(
-        child: Row(
-          children: [
-            Text(
-              "${name}",
-              style: TextStyle(fontSize: 14),
-            ),
-            Spacer(),
-            
-            Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: 18,
-                )
-          ],
+              // ignore: prefer_const_constructors
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 18,
+              )
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Settings(1, "Account Settings"),
-            Settings(2, "Change email"),
-            Settings(3, "Change Password"),
-            const Divider(),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: const Text("Languge"),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Settings(1, "Account Settings"),
+                Settings(2, "Change Mail"),
+                Settings(3, "Change Password "),
+                const Divider(),
+                Padding(
+                  padding: EdgeInsets.all(12),
+                  child: const Text("Languge"),
+                ),
+                const Divider(),
+                // ignore: prefer_const_constructors
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: const Text("Logout"),
+                )
+              ],
             ),
-
-            const Divider(),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: const Text("Logout"),
-            )
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
-

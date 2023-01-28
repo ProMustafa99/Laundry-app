@@ -21,6 +21,8 @@ class Info_order {
       required this.total});
 }
 
+
+
 List<Info_order> order = [];
 
 void r(
@@ -33,7 +35,9 @@ void r(
   int BedCover,
   int index,
   double total,
-) {
+) 
+
+{
   order.add(Info_order(
       name_services: name_services,
       Tshert: Tshert,

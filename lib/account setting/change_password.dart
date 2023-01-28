@@ -17,12 +17,11 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
   var old_password = TextEditingController();
   //Confirm
   bool Show_password = true;
-   bool Conf_Show_password = true;
-    bool old_Show_password = true;
-   var _forKey = GlobalKey<FormState>();
+  bool Conf_Show_password = true;
+  bool old_Show_password = true;
+  var _forKey = GlobalKey<FormState>();
 
-
- Widget New_password() {
+  Widget New_password() {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -52,8 +51,7 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
     );
   }
 
- 
- Widget Confirm_password() {
+  Widget Confirm_password() {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -70,8 +68,9 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
                     Conf_Show_password = !Conf_Show_password;
                   });
                 },
-                icon: Icon(
-                    Conf_Show_password ? Icons.visibility_off : Icons.visibility)),
+                icon: Icon(Conf_Show_password
+                    ? Icons.visibility_off
+                    : Icons.visibility)),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -81,11 +80,9 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
         ),
       ),
     );
-  } 
-  
+  }
 
- 
- Widget Old_password() {
+  Widget Old_password() {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -102,8 +99,9 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
                     old_Show_password = !old_Show_password;
                   });
                 },
-                icon: Icon(
-                    old_Show_password ? Icons.visibility_off : Icons.visibility)),
+                icon: Icon(old_Show_password
+                    ? Icons.visibility_off
+                    : Icons.visibility)),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -113,58 +111,63 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
         ),
       ),
     );
-  }  
-  
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Change Password"),),
-
-      body: Form(
-        key: _forKey,
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                New_password(),
-                Confirm_password(),
-                Old_password(),
-                
-
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 25,
-                ),
-                // ignore: prefer_const_constructors
-
-                Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Container(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      onPressed: () {
-                        if (_forKey.currentState!.validate()) {
-                          print("//////////////////////////////////");
-                          print("Done Save Data");
-                          print("//////////////////////////////////");
-                        }
-                      },
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          title: Text("Change Password"),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(15),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.white,
+                  child: Form(
+                    key: _forKey,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            New_password(),
+                            Confirm_password(),
+                            Old_password(),
+                           const SizedBox(
+                              height: 25,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Container(
+                                width: double.infinity,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    if (_forKey.currentState!.validate()) {
+                                      print(
+                                          "//////////////////////////////////");
+                                      print("Done Save Data");
+                                      print(
+                                          "//////////////////////////////////");
+                                    }
+                                  },
+                                  // ignore: sort_child_properties_last
+                                  child: const Text(
+                                    "Submit",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      color: Colors.blue,
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+                ))));
   }
 }
-
-

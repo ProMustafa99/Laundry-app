@@ -20,3 +20,12 @@ class Sussess_Map  extends laundry_app{}
 
 class Error_state_Map  extends laundry_app{}
 
+
+// For Pricing 
+
+class Loging_detailes  extends laundry_app{}
+
+
+class Sussess_detailes  extends laundry_app{}
+
+class Error_state_detailes  extends laundry_app{}

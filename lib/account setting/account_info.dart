@@ -18,99 +18,114 @@ class _account_infoState extends State<account_info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Setting Info"),
-      ),
-      body: Form(
-        key: _forKey,
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Fname(),
-                LName(),
-                Phone(),
-
-                Padding(
-                  padding: EdgeInsets.all(12),
-                  child: CustomDropdownButton2(
-                    hint: 'Select Item',
-                    dropdownItems: items,
-                    value: selectedValue,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value;
-                      });
-                    },
-                  ),
-                ),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 25,
-                ),
-                // ignore: prefer_const_constructors
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  // ignore: prefer_const_constructors
-                  child: Text(
-                    "Gender (optional)",
-                    style: TextStyle(color: Color(0xffBDC3C7)),
-                  ),
-                ),
-
-                Row(
-                  children: [
-                    Radio(
-                      value: "d",
-                      groupValue: _selected,
-                      onChanged: (value) {
-                        setState(() {
-                          _selected = value!;
-                        });
-                        print(_selected);
-                      },
-                    ),
-                    Text("Mail"),
-                    Radio(
-                      value: "Fmail",
-                      groupValue: _selected,
-                      onChanged: (value) {
-                        setState(() {
-                          _selected = value!;
-                        });
-                      },
-                    ),
-                    Text("Fmail"),
-                  ],
-                ),
-
-                Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Container(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      onPressed: () {
-                        if (_forKey.currentState!.validate()) {
-                          print("//////////////////////////////////");
-                          print("Done Save Data");
-                          print("//////////////////////////////////");
-                        }
-                      },
-                      child: Text(
-                        "Save Data",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.blue,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+        appBar: AppBar(
+          title: Text("Setting Info"),
         ),
-      ),
-    );
+        body: Padding(
+            padding: const EdgeInsets.all(15),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.white,
+                  child: Form(
+                    key: _forKey,
+                    child: SingleChildScrollView(
+                        child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Fname(),
+                                    LName(),
+                                    Phone(),
+
+                                    Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: CustomDropdownButton2(
+                                        hint: 'Select Item',
+                                        dropdownItems: items,
+                                        value: selectedValue,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectedValue = value;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      // ignore: prefer_const_constructors
+                                      child: Text(
+                                        "Gender (optional)",
+                                        style:
+                                            TextStyle(color: Color(0xffBDC3C7)),
+                                      ),
+                                    ),
+
+                                    Row(
+                                      children: [
+                                        Radio(
+                                          value: "d",
+                                          groupValue: _selected,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _selected = value!;
+                                            });
+                                            print(_selected);
+                                          },
+                                        ),
+                                        Text("Mail"),
+                                        Radio(
+                                          value: "Fmail",
+                                          groupValue: _selected,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _selected = value!;
+                                            });
+                                          },
+                                        ),
+                                        Text("Fmail"),
+                                      ],
+                                    ),
+
+                                    Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: Container(
+                                        width: double.infinity,
+                                        child: RaisedButton(
+                                          onPressed: () {
+                                            if (_forKey.currentState!
+                                                .validate()) {
+                                              print(
+                                                  "//////////////////////////////////");
+                                              print("Done Save Data");
+                                              print(
+                                                  "//////////////////////////////////");
+                                            }
+                                          },
+                                          child: Text(
+                                            "Save Data",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ))))),
+                  )),
+            )));
   }
 }
 

@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Color color_background = Colors.white;
+Color color_background = Color(0xFF3C79F5);
 
 
 ThemeData light = ThemeData(
@@ -14,23 +14,24 @@ ThemeData light = ThemeData(
   appBarTheme: const AppBarTheme(
       backwardsCompatibility: false,
       systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
-          statusBarIconBrightness: Brightness.dark
+          statusBarColor: Color(0xFF3C79F5),
+          statusBarIconBrightness: Brightness.light
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFF3C79F5),
       titleTextStyle: TextStyle(
-          color: Colors.black ,
+          // color: Colors.white ,
           fontSize: 20,
           fontWeight: FontWeight.bold),
-      iconTheme: IconThemeData(color: Colors.black ,size: 25),
-      elevation: 0.0
+      iconTheme: IconThemeData(color: Colors.white ,size: 25),
+      elevation: 0.0,
+      centerTitle: true
   ),
   scaffoldBackgroundColor: color_background,
   
   // ignore: prefer_const_constructors
   bottomNavigationBarTheme:BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: color_background,
       elevation: 40.0,
       backgroundColor: Colors.white
 
@@ -45,13 +46,13 @@ ThemeData light = ThemeData(
 
 
 ThemeData dark = ThemeData(
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.black,
-  brightness: Brightness.dark,
-  backgroundColor: const Color(0xFF212121),
-  accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: Colors.black),
-  dividerColor: Colors.black12,
+  // primarySwatch: Colors.grey,
+  // primaryColor: Colors.black,
+  // brightness: Brightness.dark,
+  // backgroundColor: const Color(0xFF212121),
+  // accentColor: Colors.white,
+  // accentIconTheme: IconThemeData(color: Colors.black),
+  // dividerColor: Colors.black12,
 );
 
 

@@ -52,26 +52,24 @@ class _AccountState extends State<Account> {
           }
 
           if (number == 2) {
-             AwesomeDialog(
-            context: context,
-            dialogType: DialogType.info,
-            animType: AnimType.rightSlide,
-            
-            desc: 'هذه الخدمة تحت التجهيز الأن سوف يتم إطلاقها بعد يومين ',
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {},
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.info,
+              animType: AnimType.rightSlide,
+              desc: 'هذه الخدمة تحت التجهيز الأن سوف يتم إطلاقها بعد يومين ',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {},
             )..show();
           }
 
-
           if (number == 5) {
             AwesomeDialog(
-            context: context,
-            dialogType: DialogType.info,
-            animType: AnimType.rightSlide,
-            desc: 'سيتم تفعيل  خدمة العروض  قريبا ',
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {},
+              context: context,
+              dialogType: DialogType.info,
+              animType: AnimType.rightSlide,
+              desc: 'سيتم تفعيل  خدمة العروض  قريبا ',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {},
             )..show();
             //navigateto_page(context , Detailes());
           }
@@ -107,7 +105,7 @@ class _AccountState extends State<Account> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              color: Colors.white, // set your color
+              // set your color
               child: Column(
                 children: [
                   Row(
@@ -125,7 +123,10 @@ class _AccountState extends State<Account> {
                       SizedBox(
                         width: 15,
                       ),
-                      Text("Mustafa Salameh"),
+                      Text(
+                        "Mustafa Salameh",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       Spacer(),
 
                       IconButton(
@@ -135,7 +136,7 @@ class _AccountState extends State<Account> {
                           },
                           icon: Icon(
                             Icons.settings,
-                            color: Colors.grey,
+                            color: Colors.white,
                           ))
                     ],
                   ),
@@ -145,27 +146,42 @@ class _AccountState extends State<Account> {
           ),
         ),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Items_account_page(1, "Your Order"),
-            SizedBox(
-              height: 50,
+      
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: ClipRRect(
+          borderRadius:  BorderRadius.circular(15),
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.white,
+            child: Column(
+              children: [
+                 const SizedBox(
+                  height: 50,
+                ),
+                
+                Items_account_page(1, "Your Order"),
+                const SizedBox(
+                  height: 50,
+                ),
+                Items_account_page(2, "Your Point"),
+                // ignore: prefer_const_constructors
+                SizedBox(
+                  height: 50,
+                ),
+                Items_account_page(5, "Offers"),
+                const SizedBox(
+                  height: 50,
+                ),
+                Items_account_page(4, "Get Help"),
+                const SizedBox(
+                  height: 50,
+                ),
+                Items_account_page(3, "About"),
+              ],
             ),
-            Items_account_page(2, "Your Point"),
-            SizedBox(
-              height: 50,
-            ),
-            Items_account_page(5, "Offers"),
-            SizedBox(
-              height: 50,
-            ),
-            Items_account_page(4, "Get Help"),
-            SizedBox(
-              height: 50,
-            ),
-            Items_account_page(3, "About"),
-          ],
+          ),
         ),
       ),
     );

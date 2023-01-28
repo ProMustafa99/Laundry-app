@@ -52,7 +52,9 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Dry Clean "),
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -482,6 +484,7 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
           child: Container(
               height: 80.0,
               width: double.maxFinite,
+              color :Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(

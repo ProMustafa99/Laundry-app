@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
+import 'package:app_settings/app_settings.dart';
 
 class Map_page extends StatefulWidget {
   const Map_page({Key? key}) : super(key: key);
@@ -17,29 +18,17 @@ class Map_page extends StatefulWidget {
 }
 
 class _MapState extends State<Map_page> {
-  late Position cl;
+  var x = 0;
 
-  double lat = 0;
-  double lon = 0;
-
-  Future<void> getLatAndLong() async {
-    cl = await Geolocator.getCurrentPosition().then((value) => value);
-
+  Future  refresh() async{
     setState(() {
-      lat = cl.latitude;
-      lon = cl.longitude;
+      x = 1;
+      print("${x}");
     });
-
-    print(lat);
-    print(lon);
   }
 
-  @override
-  void initState() {
-    // getLatAndLong();
-
-    super.initState();
-  }
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -79,27 +68,24 @@ class _MapState extends State<Map_page> {
                         ],
                       ),
                     ),
-              
               bottomNavigationBar: BottomAppBar(
-                
                 //color: Colors.blue,
-                
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: RaisedButton(
 
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: RaisedButton(
                     onPressed: () {
                       // ignore: avoid_single_cascade_in_expression_statements
                       AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.success,
-                      animType: AnimType.rightSlide,
-                      desc: 'تم طلبك بنجاح ',
-                      btnOkOnPress: () {
-                        navigateto_and_push(context, layout());
-                      },
-                    )..show();
-
+                        context: context,
+                        dialogType: DialogType.success,
+                        animType: AnimType.rightSlide,
+                        desc: 'تم طلبك بنجاح ',
+                        btnOkOnPress: () {
+                          navigateto_and_push(context, layout());
+                        },
+                      )..show();
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(

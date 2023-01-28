@@ -43,52 +43,60 @@ class _Change_emailState extends State<Change_email> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Change Email "),
-      ),
-      body: Form(
-        key: _forKey,
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                NewEmail(),
-                Confirm_Email(),
-                password_function(),
-
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 25,
-                ),
-                // ignore: prefer_const_constructors
-
-                Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Container(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      onPressed: () {
-                        if (_forKey.currentState!.validate()) {
-                          print("//////////////////////////////////");
-                          print("Done Save Data");
-                          print("//////////////////////////////////");
-                        }
-                      },
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.blue,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+        appBar: AppBar(
+          title: Text("Change Email "),
         ),
-      ),
-    );
+        body: Padding(
+            padding: const EdgeInsets.all(15),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.white,
+                    child: Form(
+                        key: _forKey,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                NewEmail(),
+                                Confirm_Email(),
+                                password_function(),
+
+                                // ignore: prefer_const_constructors
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                // ignore: prefer_const_constructors
+
+                                Padding(
+                                  padding: EdgeInsets.all(12),
+                                  child: Container(
+                                    width: double.infinity,
+                                    child: RaisedButton(
+                                      onPressed: () {
+                                        if (_forKey.currentState!.validate()) {
+                                          print(
+                                              "//////////////////////////////////");
+                                          print("Done Save Data");
+                                          print(
+                                              "//////////////////////////////////");
+                                        }
+                                      },
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ))))));
   }
 }
 
@@ -140,3 +148,48 @@ Widget Confirm_Email() {
     ),
   );
 }
+
+
+
+//  Form(
+//         key: _forKey,
+//         child: SingleChildScrollView(
+//           child: Container(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 NewEmail(),
+//                 Confirm_Email(),
+//                 password_function(),
+
+//                 // ignore: prefer_const_constructors
+//                 SizedBox(
+//                   height: 25,
+//                 ),
+//                 // ignore: prefer_const_constructors
+
+//                 Padding(
+//                   padding: EdgeInsets.all(12),
+//                   child: Container(
+//                     width: double.infinity,
+//                     child: RaisedButton(
+//                       onPressed: () {
+//                         if (_forKey.currentState!.validate()) {
+//                           print("//////////////////////////////////");
+//                           print("Done Save Data");
+//                           print("//////////////////////////////////");
+//                         }
+//                       },
+//                       child: Text(
+//                         "Submit",
+//                         style: TextStyle(color: Colors.white),
+//                       ),
+//                       color: Colors.blue,
+//                     ),
+//                   ),
+//                 )
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
