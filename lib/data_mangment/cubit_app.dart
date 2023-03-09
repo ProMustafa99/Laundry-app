@@ -147,3 +147,6 @@ class lundary_cubit extends Cubit<laundry_app> {
      }
 
 }
+
+
+

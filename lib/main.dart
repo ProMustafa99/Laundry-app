@@ -1,17 +1,36 @@
+import 'package:crossplat_objectid/crossplat_objectid.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Detailes/details.dart';
+import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/layout.dart';
+import 'package:flutter_application_1/login/login-page.dart';
+import 'package:flutter_application_1/point/point.dart';
 import 'package:flutter_application_1/style.dart';
 import 'package:flutter_application_1/Map/Map.dart';
 
+import 'login/login-info.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  var Data = Cash_Data();
+  var cheeck_id = await Data.getData(key: "user_id");
+  Widget Screen;
+
+  if (cheeck_id == null) {
+    Screen = login();
+  } else {
+    Screen = layout();
+  }
+
+  runApp(MyApp(Screen = Screen));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final stratWidget;
+  MyApp(this.stratWidget);
 
   // This widget is the root of your application.
   @override
@@ -20,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: light,
-      home: layout(),
+      home: stratWidget,
     );
   }
 }
@@ -34,16 +53,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-    
-        title: Text(widget.title),
-      ),
-      body: null
-       
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: null);
   }
 }

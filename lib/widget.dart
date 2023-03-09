@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -33,4 +34,7 @@ Widget Divider_line() {
     color: Colors.grey,
   );
 }
+
+    var Data = Cash_Data();
+
 

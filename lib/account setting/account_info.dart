@@ -1,8 +1,13 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
+import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class account_info extends StatefulWidget {
   const account_info({Key? key}) : super(key: key);
@@ -15,117 +20,132 @@ class _account_infoState extends State<account_info> {
   Object _selected = "d";
 
   bool vi = false;
+
+  Widget Save_data() {
+    return BlocProvider(
+      create: (BuildContext context) => get_data_cubit(Loading_change_data()),
+      child: BlocConsumer<get_data_cubit, status_get_data>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return ConditionalBuilder(
+            condition: state is Loading_change_data,
+            builder: (context) {
+              return Container(
+                width: double.infinity,
+                child: RaisedButton(
+                  onPressed: () {
+                    if (_forKey.currentState!.validate()) {
+                      get_data_cubit
+                          .get(context)
+                          .change_name_phone(context,fname.text, phone.text);
+                    }
+
+                  },
+                  color: Colors.blue,
+                  child: Text(
+                    "حفظ البيانات",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              );
+            },
+            fallback: (BuildContext context) {
+              return CircularProgressIndicator();
+            },
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Setting Info"),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.all(15),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: Colors.white,
-                  child: Form(
-                    key: _forKey,
-                    child: SingleChildScrollView(
-                        child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Container(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Fname(),
-                                    LName(),
-                                    Phone(),
+    return BlocProvider(
+      create: (BuildContext context) =>
+          get_data_cubit(Loading_get_data_user())..get_data_user(),
+      child: BlocConsumer<get_data_cubit, status_get_data>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            fname.text = get_data_cubit.get(context).Info_user.Name;
+            lname.text = get_data_cubit.get(context).Info_user.Name;
+            phone.text = get_data_cubit.get(context).Info_user.Phone;
 
-                                    Padding(
-                                      padding: EdgeInsets.all(12),
-                                      child: CustomDropdownButton2(
-                                        hint: 'Select Item',
-                                        dropdownItems: items,
-                                        value: selectedValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectedValue = value;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    // ignore: prefer_const_constructors
-                                    SizedBox(
-                                      height: 25,
-                                    ),
-                                    // ignore: prefer_const_constructors
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      // ignore: prefer_const_constructors
-                                      child: Text(
-                                        "Gender (optional)",
-                                        style:
-                                            TextStyle(color: Color(0xffBDC3C7)),
-                                      ),
-                                    ),
+            return Scaffold(
+                appBar: AppBar(
+                  title: Text("Setting Info"),
+                ),
+                body: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: Colors.white,
+                          child: Form(
+                            key: _forKey,
+                            child: SingleChildScrollView(
+                                child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Container(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Fname(),
+                                            Phone(),
 
-                                    Row(
-                                      children: [
-                                        Radio(
-                                          value: "d",
-                                          groupValue: _selected,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              _selected = value!;
-                                            });
-                                            print(_selected);
-                                          },
-                                        ),
-                                        Text("Mail"),
-                                        Radio(
-                                          value: "Fmail",
-                                          groupValue: _selected,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              _selected = value!;
-                                            });
-                                          },
-                                        ),
-                                        Text("Fmail"),
-                                      ],
-                                    ),
+                                            // ignore: prefer_const_constructors
+                                            SizedBox(
+                                              height: 25,
+                                            ),
+                                            // ignore: prefer_const_constructors
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              // ignore: prefer_const_constructors
+                                              child: Text(
+                                                "Gender (optional)",
+                                                style: TextStyle(
+                                                    color: Color(0xffBDC3C7)),
+                                              ),
+                                            ),
 
-                                    Padding(
-                                      padding: EdgeInsets.all(12),
-                                      child: Container(
-                                        width: double.infinity,
-                                        child: RaisedButton(
-                                          onPressed: () {
-                                            if (_forKey.currentState!
-                                                .validate()) {
-                                              print(
-                                                  "//////////////////////////////////");
-                                              print("Done Save Data");
-                                              print(
-                                                  "//////////////////////////////////");
-                                            }
-                                          },
-                                          child: Text(
-                                            "Save Data",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ))))),
-                  )),
-            )));
+                                            Row(
+                                              children: [
+                                                Radio(
+                                                  value: "d",
+                                                  groupValue: _selected,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selected = value!;
+                                                    });
+                                                    print(_selected);
+                                                  },
+                                                ),
+                                                Text("Mail"),
+                                                Radio(
+                                                  value: "Fmail",
+                                                  groupValue: _selected,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selected = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                Text("Fmail"),
+                                              ],
+                                            ),
+
+                                            Save_data(),
+                                          ],
+                                        ))))),
+                          )),
+                    )));
+          }),
+    );
   }
 }
 
@@ -147,7 +167,7 @@ Widget Fname() {
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please Enter  Email';
+            return 'هذا الحقل مطلوب';
           }
         },
       ),
@@ -191,7 +211,7 @@ Widget Phone() {
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please Enter  Email';
+            return 'هذا الحقل مطلوب';
           }
         },
       ),
@@ -199,14 +219,3 @@ Widget Phone() {
   );
 }
 
-final List<String> items = [
-  'سكن الفحياء',
-  'سكن قصر الطالب',
-  'سكن طيبة 1',
-  'سكن طيبة 2',
-  'سكن عمر السلمان ',
-  'سكن الزيادنة',
-  'سكن البنات الجامعة',
-  'سكن البيداء',
-];
-String? selectedValue;

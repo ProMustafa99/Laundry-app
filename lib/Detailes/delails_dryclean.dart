@@ -49,6 +49,8 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
   bool Vbutton = false;
 
   Color color_button = Colors.blue;
+
+  Map<String, dynamic> myorder = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +61,8 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
         child: Container(
           child: Column(
             children: [
+
+
               // For T-shirt
               FadeInDown(
                 delay: Duration(milliseconds: 300),
@@ -115,55 +119,57 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                           Spacer(),
                           Container(
                               child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    Tshirt++;
-                                    Total_Type_Widget = Total_Type_Widget + 1;
-                                    VTshirt = true;
-                                    Total_price = Total_price + PrTshirt;
-                                    Vbutton = true;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              Text(
-                                "${Tshirt}",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              IconButton(
-                                onPressed: VTshirt
-                                    ? () {
-                                        setState(() {
-                                          Tshirt--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
-                                          Total_price = Total_price - PrTshirt;
-                                          if (Total_price == 0) {
-                                            Vbutton = false;
-                                          }
-                                        });
-
-                                        if (Tshirt == 0) {
-                                          setState(() {
-                                            VTshirt = false;
-                                          });
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: ()
+                                    {
+                                      setState(()
+                                      {
+                                        Tshirt++;
+                                        Total_Type_Widget = Total_Type_Widget + 1;
+                                        Total_price = Total_price + PrTshirt;
+                                        Vbutton = true;
+                                        VTshirt = true;
+                                        myorder["بلوزة"] =Tshirt;
+                                      });
+                                    },
+                                    icon: Icon(Icons.add, color: Colors.blue,),
+                                  ),
+                                  Text("${Tshirt}", style: TextStyle(fontSize: 20),),
+                                  IconButton(
+                                    onPressed: VTshirt
+                                        ? () {
+                                      setState(()
+                                      {
+                                        Tshirt--;
+                                        Total_Type_Widget = Total_Type_Widget - 1;
+                                        Total_price = Total_price - PrTshirt;
+                                        myorder['بلوزة'] = Tshirt;
+                                        if (Total_price == 0) {
+                                          Vbutton = false;
                                         }
+
+                                      });
+
+
+                                      if (Tshirt == 0)
+                                      {
+                                        setState(() {
+                                          myorder.remove("بلوزة");
+                                          VTshirt = false;
+                                        });
                                       }
-                                    : null,
-                                icon: Icon(
-                                  Icons.remove,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ],
-                          ))
+
+                                    }
+                                        : null,
+                                    icon: Icon(
+                                      Icons.remove,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ],
+                              ))
                         ],
                       )),
                 ),
@@ -223,49 +229,52 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                           Spacer(),
                           Container(
                               child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    Jeans++;
-                                    Total_Type_Widget = Total_Type_Widget + 1;
-                                    VJeans = true;
-                                    Total_price = Total_price + PrJeans;
-                                    Vbutton = true;
-                                  });
-                                },
-                                icon: Icon(Icons.add, color: Colors.blue),
-                              ),
-                              Text(
-                                "${Jeans}",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              IconButton(
-                                onPressed: VJeans
-                                    ? () {
-                                        setState(() {
-                                          Jeans--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        Jeans++;
+                                        Total_Type_Widget = Total_Type_Widget + 1;
+                                        VJeans = true;
+                                        Total_price = Total_price + PrJeans;
+                                        Vbutton = true;
+                                        myorder["بنطلون"] =Jeans;
+                                        print(myorder);
+                                      });
+                                    },
+                                    icon: Icon(Icons.add, color: Colors.blue),
+                                  ),
+                                  Text(
+                                    "${Jeans}",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                    onPressed: VJeans
+                                        ? () {
+                                      setState(() {
+                                        Jeans--;
+                                        Total_Type_Widget = Total_Type_Widget - 1;
+                                        Total_price = Total_price - PrJeans;
+                                        myorder["بنطلون"] =Jeans;
 
-                                          Total_price = Total_price - PrJeans;
-                                          if (Total_price == 0) {
-                                            Vbutton = false;
-                                          }
-                                        });
-
-                                        if (Jeans == 0) {
-                                          setState(() {
-                                            VJeans = false;
-                                          });
+                                        if (Total_price == 0) {
+                                          Vbutton = false;
                                         }
+                                      });
+
+                                      if (Jeans == 0) {
+                                        setState(() {
+                                          myorder.remove("بنطلون");
+                                          VJeans = false;
+                                        });
                                       }
-                                    : null,
-                                icon: Icon(Icons.remove, color: Colors.blue),
-                              ),
-                            ],
-                          ))
+                                    }
+                                        : null,
+                                    icon: Icon(Icons.remove, color: Colors.blue),
+                                  ),
+                                ],
+                              ))
                         ],
                       )),
                 ),
@@ -325,49 +334,51 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                           Spacer(),
                           Container(
                               child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    Jaket++;
-                                    Total_Type_Widget = Total_Type_Widget + 1;
-                                    VJaket = true;
-                                    Total_price = Total_price + PrJaket;
-                                    Vbutton = true;
-                                  });
-                                },
-                                icon: Icon(Icons.add, color: Colors.blue),
-                              ),
-                              Text(
-                                "${Jaket}",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              IconButton(
-                                onPressed: VJaket
-                                    ? () {
-                                        setState(() {
-                                          Jaket--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-                                          Total_price = Total_price - PrJaket;
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        Jaket++;
+                                        Total_Type_Widget = Total_Type_Widget + 1;
+                                        VJaket = true;
+                                        Total_price = Total_price + PrJaket;
+                                        myorder["جاكيت"] =Jaket;
+                                        Vbutton = true;
+                                      });
+                                    },
+                                    icon: Icon(Icons.add, color: Colors.blue),
+                                  ),
+                                  Text(
+                                    "${Jaket}",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                    onPressed: VJaket
+                                        ? () {
+                                      setState(() {
+                                        Jaket--;
+                                        Total_Type_Widget = Total_Type_Widget - 1;
+                                        Total_price = Total_price - PrJaket;
+                                        myorder["جاكيت"] =Jaket;
 
-                                          if (Total_price == 0) {
-                                            Vbutton = false;
-                                          }
-                                        });
-
-                                        if (Jaket == 0) {
-                                          setState(() {
-                                            VJaket = false;
-                                          });
+                                        if (Total_price == 0) {
+                                          Vbutton = false;
                                         }
+                                      });
+
+                                      if (Jaket == 0) {
+                                        setState(() {
+                                          myorder.remove("جاكيت");
+                                          VJaket = false;
+                                        });
                                       }
-                                    : null,
-                                icon: Icon(Icons.remove, color: Colors.blue),
-                              ),
-                            ],
-                          ))
+                                    }
+                                        : null,
+                                    icon: Icon(Icons.remove, color: Colors.blue),
+                                  ),
+                                ],
+                              ))
                         ],
                       )),
                 ),
@@ -427,54 +438,56 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                           Spacer(),
                           Container(
                               child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    Boxer++;
-                                    Total_Type_Widget = Total_Type_Widget + 1;
-                                    VBoxer = true;
-                                    Total_price = Total_price + PrBoxer;
-                                    Vbutton = true;
-                                  });
-                                },
-                                icon: Icon(Icons.add, color: Colors.blue),
-                              ),
-                              Text(
-                                "${Boxer}",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              IconButton(
-                                onPressed: VBoxer
-                                    ? () {
-                                        setState(() {
-                                          Boxer--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        Boxer++;
+                                        Total_Type_Widget = Total_Type_Widget + 1;
+                                        VBoxer = true;
+                                        Total_price = Total_price + PrBoxer;
+                                        myorder["بوكسر"] =Boxer;
+                                        Vbutton = true;
+                                      });
+                                    },
+                                    icon: Icon(Icons.add, color: Colors.blue),
+                                  ),
+                                  Text(
+                                    "${Boxer}",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                    onPressed: VBoxer
+                                        ? () {
+                                      setState(() {
+                                        Boxer--;
+                                        Total_Type_Widget = Total_Type_Widget - 1;
+                                        myorder["بوكسر"] =Boxer;
+                                        Total_price = Total_price - PrBoxer;
 
-                                          Total_price = Total_price - PrBoxer;
-
-                                          if (Total_price == 0) {
-                                            Vbutton = false;
-                                          }
-                                        });
-
-                                        if (Boxer == 0) {
-                                          setState(() {
-                                            VBoxer = false;
-                                          });
+                                        if (Total_price == 0) {
+                                          Vbutton = false;
                                         }
+                                      });
+
+                                      if (Boxer == 0) {
+                                        setState(() {
+                                          myorder.remove("بوكسر");
+                                          VBoxer = false;
+                                        });
                                       }
-                                    : null,
-                                icon: Icon(Icons.remove, color: Colors.blue),
-                              ),
-                            ],
-                          ))
+                                    }
+                                        : null,
+                                    icon: Icon(Icons.remove, color: Colors.blue),
+                                  ),
+                                ],
+                              ))
                         ],
                       )),
                 ),
               ),
+
             ],
           ),
         ),
@@ -484,27 +497,21 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
           child: Container(
               height: 80.0,
               width: double.maxFinite,
-              color :Color(0xFF3C79F5),
+              color: Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: RaisedButton(
                       onPressed: Vbutton
-                          ? () {
-                              navigateto_page(
-                                  context,
-                                  Order_page(
-                                    this.name_service,
-                                    this.Tshirt,
-                                    this.Jeans,
-                                    this.Jaket,
-                                    this.Shoes,
-                                    this.Boxer,
-                                    this.BedCover,
-                                    this.Total_price,
-                                  ));
-                            }
+                          ? ()
+                      {
+                        myorder['المجموع'] =Total_price+1;
+                        myorder['السعر'] =Total_price;
+                        myorder["الخدمة "] = " كوي";
+                        myorder ["التوصيل"] = 1;
+                        navigateto_page(context, Order_page(myorder));
+                      }
                           : null,
                       padding: const EdgeInsets.all(0.0),
                       color: color_button,
@@ -516,7 +523,7 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                             Text(
                               "${Total_Type_Widget}",
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              TextStyle(fontSize: 20, color: Colors.white),
                             ),
                             SizedBox(
                               width: 14,
@@ -524,13 +531,13 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                             Text(
                               "View Order",
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              TextStyle(fontSize: 20, color: Colors.white),
                             ),
                             Spacer(),
                             Text(
                               "${Total_price} JD",
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              TextStyle(fontSize: 20, color: Colors.white),
                             )
                           ],
                         ),

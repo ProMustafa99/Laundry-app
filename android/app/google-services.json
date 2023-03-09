@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "791268384885",
+    "project_id": "laundry-app-ac9b0",
+    "storage_bucket": "laundry-app-ac9b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791268384885:android:122e9019a1dd5703ecd83c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791268384885-pa90d4cv3m18i31aqsiqb65t0muk3qhl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "b5eacde4f176000796ca609773e0d03ed10ecabe"
+          }
+        },
+        {
+          "client_id": "791268384885-s4he62gibv08j1eg7khgf57tl8p7cm8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaQ9Pv_yosHAE4WE_GiE8A0TLcbL8XVtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791268384885-s4he62gibv08j1eg7khgf57tl8p7cm8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -45,6 +45,17 @@ dependencies:
   app_settings: ^4.2.0
   carousel_slider: ^4.2.1
   smooth_page_indicator: ^1.0.0+2
+  firebase_core: ^1.12.0
+  cloud_firestore: ^3.1.14
+  firebase_auth: ^3.3.18
+  firebase_core_platform_interface: 4.5.1
+  shared_preferences: ^2.0.13
+  crossplat_objectid: ^3.0.0
+
+
+
+
+
 
 
 
@@ -89,6 +100,14 @@ flutter:
     - assets/page1/dry-cleaning.png
     - assets/page1/bar-code.png
     - assets/page1/qr-code.png
+
+    - assets/login/login.jpg
+    - assets/login/facebook.png
+    - assets/login/telephone.png
+    - assets/login/login-page.jpg
+
+
+
    
 
 

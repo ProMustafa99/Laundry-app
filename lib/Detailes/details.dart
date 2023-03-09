@@ -23,9 +23,10 @@ class _DetailesState extends State<Detailes> {
   String name_service;
   _DetailesState(this.name_service);
 
-  int Tshirt = 0;
-  double PrTshirt = 0.5;
-  bool VTshirt = false;
+
+  int Tshirt = 0; // Number Of Teshert
+  double PrTshirt = 0.5; // Price PrTshirt
+  bool VTshirt = false; // if Number of Tshirt < 1 hidden -
 
   int Jeans = 0;
   double PrJeans = 0.5;
@@ -47,12 +48,20 @@ class _DetailesState extends State<Detailes> {
   double PrBedCover = 2.5;
   bool VBedCover = false;
 
+
+  // Number of Pieces
   int Total_Type_Widget = 0;
+
+  // Total Price
   double Total_price = 0;
 
   bool Vbutton = false;
 
   Color color_button = Colors.blue;
+
+
+  Map<String, dynamic> myorder = {};
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,43 +133,45 @@ class _DetailesState extends State<Detailes> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               IconButton(
-                                onPressed: () {
-                                  setState(() {
+                                onPressed: ()
+                                {
+                                  setState(()
+                                  {
                                     Tshirt++;
                                     Total_Type_Widget = Total_Type_Widget + 1;
-                                    VTshirt = true;
                                     Total_price = Total_price + PrTshirt;
                                     Vbutton = true;
+                                    VTshirt = true;
+                                    myorder["بلوزة"] =Tshirt;
                                   });
                                 },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.blue,
-                                ),
+                                icon: Icon(Icons.add, color: Colors.blue,),
                               ),
-                              Text(
-                                "${Tshirt}",
-                                style: TextStyle(fontSize: 20),
-                              ),
+                              Text("${Tshirt}", style: TextStyle(fontSize: 20),),
                               IconButton(
                                 onPressed: VTshirt
                                     ? () {
-                                        setState(() {
+                                        setState(()
+                                        {
                                           Tshirt--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
+                                          Total_Type_Widget = Total_Type_Widget - 1;
                                           Total_price = Total_price - PrTshirt;
+                                          myorder['بلوزة'] = Tshirt;
                                           if (Total_price == 0) {
                                             Vbutton = false;
                                           }
+
                                         });
 
-                                        if (Tshirt == 0) {
+
+                                        if (Tshirt == 0)
+                                        {
                                           setState(() {
+                                            myorder.remove("بلوزة");
                                             VTshirt = false;
                                           });
                                         }
+
                                       }
                                     : null,
                                 icon: Icon(
@@ -239,6 +250,8 @@ class _DetailesState extends State<Detailes> {
                                     VJeans = true;
                                     Total_price = Total_price + PrJeans;
                                     Vbutton = true;
+                                    myorder["بنطلون"] =Jeans;
+                                    print(myorder);
                                   });
                                 },
                                 icon: Icon(Icons.add, color: Colors.blue),
@@ -252,10 +265,10 @@ class _DetailesState extends State<Detailes> {
                                     ? () {
                                         setState(() {
                                           Jeans--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
+                                          Total_Type_Widget = Total_Type_Widget - 1;
                                           Total_price = Total_price - PrJeans;
+                                          myorder["بنطلون"] =Jeans;
+
                                           if (Total_price == 0) {
                                             Vbutton = false;
                                           }
@@ -263,6 +276,7 @@ class _DetailesState extends State<Detailes> {
 
                                         if (Jeans == 0) {
                                           setState(() {
+                                            myorder.remove("بنطلون");
                                             VJeans = false;
                                           });
                                         }
@@ -340,6 +354,7 @@ class _DetailesState extends State<Detailes> {
                                     Total_Type_Widget = Total_Type_Widget + 1;
                                     VJaket = true;
                                     Total_price = Total_price + PrJaket;
+                                    myorder["جاكيت"] =Jaket;
                                     Vbutton = true;
                                   });
                                 },
@@ -354,9 +369,9 @@ class _DetailesState extends State<Detailes> {
                                     ? () {
                                         setState(() {
                                           Jaket--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
+                                          Total_Type_Widget = Total_Type_Widget - 1;
                                           Total_price = Total_price - PrJaket;
+                                          myorder["جاكيت"] =Jaket;
 
                                           if (Total_price == 0) {
                                             Vbutton = false;
@@ -365,6 +380,7 @@ class _DetailesState extends State<Detailes> {
 
                                         if (Jaket == 0) {
                                           setState(() {
+                                            myorder.remove("جاكيت");
                                             VJaket = false;
                                           });
                                         }
@@ -442,6 +458,7 @@ class _DetailesState extends State<Detailes> {
                                     Total_Type_Widget = Total_Type_Widget + 1;
                                     VShoes = true;
                                     Total_price = Total_price + PrShoes;
+                                    myorder["حذاء"] =Shoes;
                                     Vbutton = true;
                                   });
                                 },
@@ -456,10 +473,9 @@ class _DetailesState extends State<Detailes> {
                                     ? () {
                                         setState(() {
                                           Shoes--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
+                                          Total_Type_Widget = Total_Type_Widget - 1;
                                           Total_price = Total_price - PrShoes;
+                                          myorder["حذاء"] =Shoes;
 
                                           if (Total_price == 0) {
                                             Vbutton = false;
@@ -468,6 +484,7 @@ class _DetailesState extends State<Detailes> {
 
                                         if (Shoes == 0) {
                                           setState(() {
+                                            myorder.remove("حذاء");
                                             VShoes = false;
                                           });
                                         }
@@ -546,6 +563,7 @@ class _DetailesState extends State<Detailes> {
                                     Total_Type_Widget = Total_Type_Widget + 1;
                                     VBoxer = true;
                                     Total_price = Total_price + PrBoxer;
+                                    myorder["بوكسر"] =Boxer;
                                     Vbutton = true;
                                   });
                                 },
@@ -560,9 +578,8 @@ class _DetailesState extends State<Detailes> {
                                     ? () {
                                         setState(() {
                                           Boxer--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
+                                          Total_Type_Widget = Total_Type_Widget - 1;
+                                          myorder["بوكسر"] =Boxer;
                                           Total_price = Total_price - PrBoxer;
 
                                           if (Total_price == 0) {
@@ -572,6 +589,7 @@ class _DetailesState extends State<Detailes> {
 
                                         if (Boxer == 0) {
                                           setState(() {
+                                            myorder.remove("بوكسر");
                                             VBoxer = false;
                                           });
                                         }
@@ -650,6 +668,7 @@ class _DetailesState extends State<Detailes> {
                                     Total_Type_Widget = Total_Type_Widget + 1;
                                     VBedCover = true;
                                     Total_price = Total_price + PrBedCover;
+                                    myorder["حرام"] =BedCover;
                                     Vbutton = true;
                                   });
                                 },
@@ -664,11 +683,9 @@ class _DetailesState extends State<Detailes> {
                                     ? () {
                                         setState(() {
                                           BedCover--;
-                                          Total_Type_Widget =
-                                              Total_Type_Widget - 1;
-
-                                          Total_price =
-                                              Total_price - PrBedCover;
+                                          Total_Type_Widget = Total_Type_Widget - 1;
+                                          Total_price = Total_price - PrBedCover;
+                                          myorder["حرام"] =BedCover;
 
                                           if (Total_price == 0) {
                                             Vbutton = false;
@@ -677,6 +694,7 @@ class _DetailesState extends State<Detailes> {
 
                                         if (BedCover == 0) {
                                           setState(() {
+                                            myorder.remove("حرام");
                                             VBedCover = false;
                                           });
                                         }
@@ -694,6 +712,7 @@ class _DetailesState extends State<Detailes> {
           ),
         ),
       ),
+
       bottomNavigationBar: BottomAppBar(
         child: FadeInDown(
           child: Container(
@@ -706,19 +725,13 @@ class _DetailesState extends State<Detailes> {
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: RaisedButton(
                       onPressed: Vbutton
-                          ? () {
-                              navigateto_page(
-                                  context,
-                                  Order_page(
-                                    this.name_service,
-                                    this.Tshirt,
-                                    this.Jeans,
-                                    this.Jaket,
-                                    this.Shoes,
-                                    this.Boxer,
-                                    this.BedCover,
-                                    this.Total_price,
-                                  ));
+                          ? ()
+                              {
+                                myorder['المجموع'] =Total_price+1;
+                                myorder['السعر'] =Total_price;
+                                myorder["الخدمة "] = "غسيل";
+                                myorder ["التوصيل"] = 1;
+                                navigateto_page(context, Order_page(myorder));
                             }
                           : null,
                       padding: const EdgeInsets.all(0.0),
