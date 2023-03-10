@@ -17,6 +17,8 @@ void main() async {
   await Firebase.initializeApp();
   var Data = Cash_Data();
   var cheeck_id = await Data.getData(key: "user_id");
+
+  var wqwqw ="sdas";
   Widget Screen;
 
   if (cheeck_id == null) {

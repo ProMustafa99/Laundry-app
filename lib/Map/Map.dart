@@ -43,12 +43,12 @@ class _MapState extends State<Map_page> {
                   desc: 'تم طلبك بنجاح ',
                   btnOkOnPress: () {
                     navigateto_and_push(context,layout());
+
                   },
                 )..show();
 
-                order_details["وقت الطلب"] =  DateFormat.yMEd().add_jms().format(DateTime.now());
-
-                get_data_cubit.get(context).order(order_details);
+                order_details["وقت الطلب"] =DateFormat('M/d/y').add_jm().format(DateTime.now());
+                get_data_cubit.get(context).order_user(order_details);
               },
               // ignore: sort_child_properties_last
               child: const Text(

@@ -46,6 +46,7 @@ class _AccountState extends State<Account> {
         left: 20,
       ),
       child: InkWell(
+
         onTap: () {
           if (number == 1) {
             navigateto_page(context, order_list());
@@ -76,22 +77,27 @@ class _AccountState extends State<Account> {
             //navigateto_page(context , Detailes());
           }
         },
-        child: Container(
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                size: 30,
-                color: Colors.black,
-              ),
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                "${name}",
-                style: TextStyle(fontSize: 15),
-              ),
-            ],
+
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "${name}",
+                  style: TextStyle(fontSize: 15 ,),  textAlign: TextAlign.right,
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                Icon(
+                  icon,
+                  size: 30,
+                  color: Colors.black,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -112,8 +118,10 @@ class _AccountState extends State<Account> {
                 children: [
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
+
                     children: [
                       // ignore: prefer_const_constructors
+
                       CircleAvatar(
                         backgroundColor: Colors.blue,
                         radius: 20,
@@ -122,13 +130,15 @@ class _AccountState extends State<Account> {
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
-                      SizedBox(
-                        width: 15,
-                      ),
+
+
+                      SizedBox(width: 15,),
+
                       Text(
                         "Mustafa Salameh",
                         style: TextStyle(color: Colors.white),
                       ),
+
                       Spacer(),
 
                       IconButton(
@@ -163,24 +173,25 @@ class _AccountState extends State<Account> {
                   height: 50,
                 ),
                 
-                Items_account_page(1, "Your Order"),
+                Items_account_page(1, "طلباتي"),
                 const SizedBox(
                   height: 50,
                 ),
-                Items_account_page(2, "Your Point"),
+                Items_account_page(2, "نقاطي"),
                 // ignore: prefer_const_constructors
                 SizedBox(
                   height: 50,
                 ),
-                Items_account_page(5, "Offers"),
+                Items_account_page(5, "خصومات "),
                 const SizedBox(
                   height: 50,
                 ),
-                Items_account_page(4, "Get Help"),
+                Items_account_page(4, "خدمة العملاء"),
                 const SizedBox(
                   height: 50,
                 ),
-                Items_account_page(3, "About"),
+                Items_account_page(3, "من نحن"),
+
               ],
             ),
           ),

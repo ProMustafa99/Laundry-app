@@ -48,11 +48,11 @@ class _homeState extends State<Home> {
 
           onTap: () {
             if (numsber_contant == 1) {
-              navigateto_page(context, Detailes("Wash"));
+              navigateto_page(context, Detailes("غسيل"));
             }
 
             else if (numsber_contant == 2) {
-              navigateto_page(context, Details_dry_clean("DryClean"));
+              navigateto_page(context, Details_dry_clean("دراي كلين"));
             }
           },
           child: Container(
@@ -136,8 +136,8 @@ class _homeState extends State<Home> {
                     const SizedBox(
                       height: 15,
                     ),
-                    conatant(1, "Washing"),
-                    conatant(2, "IRONIN"),
+                    conatant(1, "غسيل"),
+                    conatant(2, "دراي كلين"),
                   ],
                 )),
           ),

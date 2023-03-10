@@ -8,6 +8,7 @@ import 'package:flutter_application_1/data_mangment/backend_app/status_backend.d
 import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
 import 'package:flutter_application_1/layout.dart';
 import 'package:flutter_application_1/model/info-user.dart';
+import 'package:flutter_application_1/model/info_order.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:crossplat_objectid/crossplat_objectid.dart';
@@ -58,6 +59,7 @@ class get_data_cubit extends Cubit<status_get_data> {
     });
   }
 
+  
   //For Firebase Store
 
   void Information_user(context, String name, String email, String password, String id, String phone) {
@@ -81,7 +83,9 @@ class get_data_cubit extends Cubit<status_get_data> {
 
   InfoUserModel Info_user = InfoUserModel("", "", "", "");
 
-  void get_data_user() async {
+  void get_data_user() async 
+  
+  {
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
 
@@ -112,7 +116,9 @@ class get_data_cubit extends Cubit<status_get_data> {
     });
   }
 
-  void change_name_phone(context, String New_Name, String New_phone) async {
+  void change_name_phone(context, String New_Name, String New_phone) async
+  
+  {
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
 
@@ -131,6 +137,7 @@ class get_data_cubit extends Cubit<status_get_data> {
   }
 
   void change_email(context, String Email,) async
+git   
   {
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
@@ -147,6 +154,7 @@ class get_data_cubit extends Cubit<status_get_data> {
   }
 
   void change_password(context, String password,) async
+  
   {
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
@@ -164,11 +172,12 @@ class get_data_cubit extends Cubit<status_get_data> {
     });
   }
 
+
+  
   // Send Order
 
-
-
-  void order( Map<String, dynamic> order_details) async
+  void order_user( Map<String, dynamic> order_details) async
+  
   {
       Data = Cash_Data();
       var cheeck_id = await Data.getData(key: "user_id");
@@ -189,29 +198,60 @@ class get_data_cubit extends Cubit<status_get_data> {
       order_details ["Name"] = Info_user.Name;
       order_details ["phone"] = Info_user.Phone;
       Info_order(Id_user, Id_order,order_details);
+      order_for_admin(Id_order ,order_details);
 
-      print( "Done Send  To  InFo Order ");
     }).
-     catchError((e) {  print( "Here Error when Sending  To  InFo Order ");});
+     catchError((e) {
+
+        print(e);
+       print( "Here Error when Sending  To  InFo Order ");
+
+     });
   }
 
 
-
-  void Info_order(String Id_user, var id_order, Map<String, dynamic> order_details) {
+  void Info_order(String Id_user, var id_order, Map<String, dynamic> order_details)
+   {
          FirebaseFirestore.instance.collection("user").doc("${Id_user}" ,)
         .collection("order")
         .doc("${id_order}")
         .set(order_details)
         .then((value)
          {
+
             emit(Sussess_send_order());
-            print("Done Send To Server");
+
 
         }).catchError((e) {
       emit(Error_state_send_order());
-      print("Icant Send To Server ");
-      print(e.toString());
 
     });
   }
+  // End  Send Order
+
+
+  // send Order For Admin
+
+    void order_for_admin (var id_order , Map<String, dynamic> order_details) {
+
+        emit(Loading_send_order_for_admin());
+        FirebaseFirestore.instance.collection("orders")
+            .doc("${id_order}")
+            .set(order_details)
+            .then((value)
+            {
+              print("Done Send data");
+              emit(Sussess_send_order_for_admin());
+            })
+            .catchError((e){
+
+               print("Here Error ");
+               print(e.toString());
+               emit(Error_state_send_order_for_admin());
+            });
+    
+    }
+    
+  
 }
+

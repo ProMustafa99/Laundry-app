@@ -731,6 +731,7 @@ class _DetailesState extends State<Detailes> {
                                 myorder['السعر'] =Total_price;
                                 myorder["الخدمة "] = "غسيل";
                                 myorder ["التوصيل"] = 1;
+                                myorder['عدد القطع'] =Total_Type_Widget;
                                 navigateto_page(context, Order_page(myorder));
                             }
                           : null,

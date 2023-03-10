@@ -23,7 +23,7 @@ class lundary_cubit extends Cubit<laundry_app> {
     // ignore: prefer_const_constructors
     BottomNavigationBarItem(
       icon: const Icon(Icons.home),
-      label: 'Home',
+      label: 'الرئيسية',
     ),
 
     // ignore: prefer_const_constructors
@@ -31,7 +31,7 @@ class lundary_cubit extends Cubit<laundry_app> {
       icon: const Icon(
         Icons.account_circle,
       ),
-      label: 'Account',
+      label: 'حسابي',
     ),
   ];
 
