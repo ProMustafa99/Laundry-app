@@ -5,37 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13e99f9b-e358-4636-9fa4-c7bfa00f6596" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/model/info_order.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/.filecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/app.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/kernel_snapshot.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/0abd7de34b51af9ad46bf2e5fb0a8244/kernel_snapshot.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Detailes/delails_dryclean.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Detailes/delails_dryclean.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Detailes/details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Detailes/details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Map/Map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Map/Map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/account setting/Account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/account setting/Account.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data_mangment/backend_app/cubit_firebase.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data_mangment/backend_app/cubit_firebase.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data_mangment/backend_app/status_backend.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data_mangment/backend_app/status_backend.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data_mangment/cubit_app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data_mangment/cubit_app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/order/list_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/order/list_order.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
