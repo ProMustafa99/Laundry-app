@@ -136,7 +136,7 @@ class get_data_cubit extends Cubit<status_get_data> {
     });
   }
 
-  void change_email(context, String Email,) async   
+  void change_email(context, String Email,) async
   {
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
