@@ -52,6 +52,7 @@ dependencies:
   firebase_core_platform_interface: 4.5.1
   shared_preferences: ^2.0.13
   crossplat_objectid: ^3.0.0
+  device_preview: ^1.1.0
 
 
 

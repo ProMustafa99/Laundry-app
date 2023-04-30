@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
 import 'package:flutter_application_1/layout.dart';
 import 'package:flutter_application_1/style.dart';
-
+import 'package:device_preview/device_preview.dart';
 import 'login/login-info.dart';
 
 void main() async {
@@ -20,7 +20,7 @@ void main() async {
     Screen = layout();
   }
 
-  runApp(MyApp(Screen = Screen));
+  runApp(DevicePreview(builder: (context)=>MyApp(Screen = Screen)));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: light,

@@ -85,7 +85,7 @@ class _homeState extends State<Home> {
 
           backgroundColor: const Color(0xFF3C79F5),
           title: const Text(
-            "Home",
+            "الرئيسية",
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -99,66 +99,66 @@ class _homeState extends State<Home> {
               topRight: Radius.circular(15.0)
 
             ),
-            child: Expanded(
-              child: Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Column(
-                    children: [
-                      CarouselSlider(
-                        items: ItemsSider.map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                                width: double.infinity,
-                                child: ClipRRect(
-                                    borderRadius:  BorderRadius.circular(20),
-                                  child: Image(
-                                    image: NetworkImage('${e.image}'),
-                                  ),
-                                ),
-                              ),
-                        )).toList(),
-                        options: CarouselOptions(
-                          autoPlay: true,
-                          viewportFraction: 1.0,
-                          reverse: true,
-                          enlargeCenterPage: true,
-                          padEnds: true,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              activeindex = index;
-                            });
-                          },
+            child:  Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    items: ItemsSider.map((e) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius:  BorderRadius.circular(20),
+                          child: Image(
+                            image: NetworkImage('${e.image}'),
+                          ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      bulidIndctor(),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                    )).toList(),
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      viewportFraction: 1.0,
+                      reverse: true,
+                      enlargeCenterPage: true,
+                      padEnds: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          activeindex = index;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
 
-                      Row(
+                  bulidIndctor(),
 
-                        children: [
-                          conatant(1 , "غسيل"),
-                          const SizedBox(width: 25,),
-                          conatant(2, "كوي"),
-                        ],
-                      ),
+                  Expanded(
+                    child: Row(
 
-                      Row(
-                        children: [
-                          conatant(3 ,  "كوي+غسيل"),
-                        ],
-                      ),
+                      children: [
+                        conatant(1 , "غسيل"),
+                        const SizedBox(width: 25,),
+                        conatant(2, "كوي"),
+                      ],
+                    ),
+                  ),
 
-
-                    ],
-                  )),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        conatant(3 ,  "كوي+غسيل"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
+
           ),
         ));
   }
