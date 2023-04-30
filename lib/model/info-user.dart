@@ -3,7 +3,6 @@ class InfoUserModel
   late String Email;
   late String Name;
   late String Phone;
-  late String Password;
   // late String uId;
 
 
@@ -13,7 +12,6 @@ class InfoUserModel
       this.Email,
       this.Phone,
       // this.uId ,
-      this.Password,
       );
   InfoUserModel.fromJson(Map<String,dynamic> json)
   {
@@ -21,7 +19,6 @@ class InfoUserModel
     Email =json['Email'];
     Name =json['Name'];
     Phone =json['Phone'];
-    Password =json['Password'];
     // uId =json['uid'];
     
   }
@@ -30,7 +27,6 @@ class InfoUserModel
       'Name':Name ,
       'Email':Email ,
       'Phone':Phone,
-      'Password':Password,
       // 'uid':uId,
     };}
 

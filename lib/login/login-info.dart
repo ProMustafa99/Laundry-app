@@ -5,14 +5,14 @@ import 'package:flutter_application_1/login/login-page.dart';
 import 'package:flutter_application_1/login/sign-up.dart';
 import 'package:flutter_application_1/widget.dart';
 
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+class login_info extends StatefulWidget {
+  const login_info({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _loginState();
+  State<login_info> createState() => _loginState();
 }
 
-class _loginState extends State<login> {
+class _loginState extends State<login_info> {
   Widget login_user() {
     return Container(
       child: Row(
@@ -58,19 +58,18 @@ class _loginState extends State<login> {
         padding: const EdgeInsets.only(top: 50),
         child: Column(
           children: [
+
             Name_app(),
+
             SizedBox(
               height: 20,
             ),
+
             image_app(),
-            SizedBox(
-              height: 10,
-            ),
+
             login_user(),
-            SizedBox(
-              height: 20,
-            ),
-            login_paltform(),
+
+
           ],
         ),
       ),
@@ -158,25 +157,3 @@ Widget login_paltform() {
 
 
 
-Widget Phone() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        maxLength: 10,
-        controller: phone,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          labelText: "Phone Number",
-          hintText: '07********',
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please Enter  Email';
-          }
-        },
-      ),
-    ),
-  );
-}

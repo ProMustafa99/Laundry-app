@@ -29,3 +29,11 @@ class Loging_detailes  extends laundry_app{}
 class Sussess_detailes  extends laundry_app{}
 
 class Error_state_detailes  extends laundry_app{}
+
+
+class Loging_Info_list_purchases  extends laundry_app{}
+
+
+class Sussess_Info_list_purchases  extends laundry_app{}
+
+class Error_Info_list_purchases  extends laundry_app{}

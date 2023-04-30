@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/account%20setting/change_email.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
+import 'package:flutter_application_1/login/resrpassword.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,16 +42,19 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
         child: TextFormField(
           controller: new_password,
           obscureText: Show_password,
+          textAlign: TextAlign.end,
           decoration: InputDecoration(
-            hintText: 'كلمة مرور جديد',
-            suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    Show_password = !Show_password;
-                  });
-                },
-                icon: Icon(
-                    Show_password ? Icons.visibility_off : Icons.visibility)),
+              hintText:  "كلمة المرور الجديدة",
+              prefixIcon :IconButton(
+                  onPressed: () {
+                    setState(() {
+                      Show_password = !Show_password;
+                    });
+                  },
+
+                  icon: Icon(
+                      Show_password ? Icons.visibility_off : Icons.visibility)
+              )
           ),
           validator: (value) {
 
@@ -92,23 +96,26 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
         width: double.infinity,
         height: 60,
         child: TextFormField(
+          textAlign: TextAlign.end,
           controller: confirm_password,
           obscureText: Conf_Show_password,
           decoration: InputDecoration(
-            hintText: 'إعادة كلمة المرور',
-            suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    Conf_Show_password = !Conf_Show_password;
-                  });
-                },
-                icon: Icon(Conf_Show_password
-                    ? Icons.visibility_off
-                    : Icons.visibility)),
+              hintText:  "إعادة كلمة المرور",
+
+              prefixIcon :IconButton(
+                  onPressed: () {
+                    setState(() {
+                      Conf_Show_password = !Conf_Show_password;
+                    });
+                  },
+
+                  icon: Icon(
+                      Conf_Show_password ? Icons.visibility_off : Icons.visibility)
+              )
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'الرجاء إعادة كلمة المرور ';
+              return 'الرجاء ادخال نفس كلمة المرور الموجودة أعلاه';
             }
           },
         ),
@@ -123,19 +130,21 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
         width: double.infinity,
         height: 60,
         child: TextFormField(
+          textAlign: TextAlign.end,
           controller: old_password,
           obscureText: old_Show_password,
           decoration: InputDecoration(
-            hintText: 'كلمة المرور القديمة  ',
-            suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    old_Show_password = !old_Show_password;
-                  });
-                },
-                icon: Icon(old_Show_password
-                    ? Icons.visibility_off
-                    : Icons.visibility)),
+            hintText:  "كلمة المرور القديمة",
+              prefixIcon :IconButton(
+                  onPressed: () {
+                    setState(() {
+                      old_Show_password = !old_Show_password;
+                    });
+                  },
+
+                  icon: Icon(
+                      old_Show_password ? Icons.visibility_off : Icons.visibility)
+              )
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -147,14 +156,29 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
     );
   }
 
+  Widget repassword () {
+    return Container(
+      child:     Center(
+        child: TextButton(
+          onPressed: () {
+            navigateto_page(context ,restpassword());
+          },
+          child:  Text("هل نسيت كلمة المرور ؟", style: TextStyle(color: Color(0xFF3C79F5) , fontWeight: FontWeight.bold),),
+
+        ),
+      ),
+    );
+  }
+
   Widget Save_data() {
     return BlocProvider(
-      create: (BuildContext context) => get_data_cubit(Loading_change_data()),
+      create: (BuildContext context) => get_data_cubit(LoginInitialdata()),
+
       child: BlocConsumer<get_data_cubit, status_get_data>(
         listener: (context, state) {},
         builder: (context, state) {
           return ConditionalBuilder(
-            condition: state is Loading_change_data,
+            condition: state is !Loading_change_data,
             builder: (context) {
               return Padding(
                 padding: const EdgeInsets.all(12),
@@ -164,23 +188,7 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
                     onPressed: () {
                       if (_forKey.currentState!.validate()) {
                         if (new_password.text == confirm_password.text) {
-                          
-                          if (check_old_password == old_password.text) {
-                            get_data_cubit
-                                .get(context)
-                                .change_password(context, new_password.text);
-                          } 
-                          else {
-                             AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.error,
-                            animType: AnimType.rightSlide,
-                            desc: 'كلمة المرور القديمة غير صحيحة ',
-                            btnCancelOnPress: () {},
-                            btnOkOnPress: () {},
-                          )..show();
-
-                          }
+                          get_data_cubit.get(context).change_password(context, new_password.text,old_password.text);
                         } else {
                           AwesomeDialog(
                             context: context,
@@ -195,7 +203,7 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
                     },
                     color: Colors.blue,
                     child: Text(
-                      "تغير كلمة المرور",
+                      "حفظ التعديلات",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
@@ -203,7 +211,9 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
               );
             },
             fallback: (BuildContext context) {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
           );
         },
@@ -219,14 +229,11 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
       child: BlocConsumer<get_data_cubit, status_get_data>(
           listener: (context, state) {},
           builder: (context, state) {
-            check_old_password = get_data_cubit.get(context).Info_user.Password;
-            print(" **************** Old Passowrd  ****************");
-            print(check_old_password);
-            print(" **************** Old Passowrd  ****************");
+            // check_old_password = get_data_cubit.get(context).Info_user.Password;
 
             return Scaffold(
                 appBar: AppBar(
-                  title: Text("Change Password"),
+                  title: Text("تغير كلمة المرور"),
                 ),
                 body: Padding(
                     padding: const EdgeInsets.all(15),
@@ -243,9 +250,10 @@ class _Change_PassowrdState extends State<Change_Passowrd> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Old_password(),
                                     New_password(),
                                     Confirm_password(),
-                                    Old_password(),
+                                    repassword(),
                                     const SizedBox(
                                       height: 25,
                                     ),

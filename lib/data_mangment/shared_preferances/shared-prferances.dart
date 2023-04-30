@@ -24,7 +24,7 @@ class Cash_Data{
 
   Future RemoveData() async{
     Data = await SharedPreferences.getInstance();
-    return await Data.remove("User_Id");
+    return await Data.remove("user_id");
   }
 
 

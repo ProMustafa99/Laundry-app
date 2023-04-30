@@ -13,6 +13,213 @@ class Sing_Up extends StatefulWidget {
 }
 
 class _Sing_UpState extends State<Sing_Up> {
+
+  bool Show_password = true;
+  bool re_Show_password = true;
+
+  var name = TextEditingController();
+  var email = TextEditingController();
+  var password = TextEditingController();
+  var phone_number = TextEditingController();
+
+  var re_password = TextEditingController();
+  var _forKey = GlobalKey<FormState>();
+
+
+  Widget Name() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: TextFormField(
+          controller: name,
+          textAlign: TextAlign.end,
+          maxLength: 20,
+          decoration: InputDecoration(
+
+            border: OutlineInputBorder(),
+            label: Container (
+              width: double.infinity,
+              child: Text("الإسم" ,textAlign: TextAlign.end,),
+            ),
+            hintText: "Ali Ahmmad",
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'الرجاء إدخال الاسم ';
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget Email() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: TextFormField(
+          textAlign: TextAlign.end,
+
+          controller: email,
+          // ignore: prefer_const_constructors
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              label: Container (
+                width: double.infinity,
+                child: Text("البريد الإلكتروني" ,textAlign: TextAlign.end,),
+              ),
+              hintText: "exambel@exambel.com"
+          ),
+          validator: (value) {
+            RegExp regex = RegExp(r'^(?=.*?[.])(?=.*?[@])(?=.*?[com]).{8,}$');
+
+
+            if (value == null || value.isEmpty) {
+              return 'الرجاء إدخال البريد الإلكتروني ';
+            } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+              return "صيغة البريد الإلكتروني خاظئة";
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget passowrd() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+
+        child: TextFormField(
+          controller: password,
+          textAlign: TextAlign.end,
+          obscureText: Show_password,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              label:Container (
+                width: double.infinity,
+                child: Text("كلمة المرور" ,textAlign: TextAlign.end,),
+              ),
+              prefixIcon :IconButton(
+                onPressed: () {
+                    setState(() {
+                      Show_password = !Show_password;
+                    });
+                },
+
+                  icon: Icon(
+                      Show_password ? Icons.visibility_off : Icons.visibility)
+              )
+
+          ),
+
+          validator: (value) {
+            //  RegExp regex = RegExp(
+            //     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+            RegExp capital_char = RegExp(r'^(?=.*?[A-Z])');
+
+            RegExp smal_char = RegExp(r'^(?=.*?[a-z])');
+
+            RegExp spical_char = RegExp(r'^(?=.*?[!@#\$&*~])');
+
+            RegExp number = RegExp(r'^(?=.*?[0-9])');
+
+            var passNonNullValue = value ?? "";
+
+            if (value == null || value.isEmpty) {
+              return 'الرجاء إدخال كلمة المرور ';
+            }
+
+            else if (value.length < 7) {
+              return 'كلمة المرور قصيرة ';
+            } else if (!capital_char.hasMatch(passNonNullValue)) {
+              return (" يجب ان تحتوي كلمة المرور على حروف  كبيرة   ");
+            } else if (!smal_char.hasMatch(passNonNullValue)) {
+              return ("يجب ان تحتوي كلمة المرور على حروف صغيرة");
+            } else if (!spical_char.hasMatch(passNonNullValue)) {
+              return ("يجب ان تحتوي كلمة المرور على رموز خاصة");
+            } else if (!number.hasMatch(passNonNullValue)) {
+              return ("يجب ان تحتوي كلمة المرور على ارقام");
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget re_passowrd() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: TextFormField(
+          controller: re_password,
+          textAlign: TextAlign.end,
+          obscureText: re_Show_password,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            label :Container (
+              width: double.infinity,
+              child: Text("إعادة كلمة المرور" ,textAlign: TextAlign.end,),
+            ),
+
+              prefixIcon :IconButton(
+                  onPressed: () {
+                    setState(() {
+                      re_Show_password = !re_Show_password;
+                    });
+                  },
+
+                  icon: Icon(
+                      re_Show_password ? Icons.visibility_off : Icons.visibility)
+              )
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'الرجاء ادخال نفس كلمة المرور الموجودة أعلاه';
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget Phone() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: TextFormField(
+          keyboardType: TextInputType.phone,
+          controller: phone_number,
+          maxLength: 10,
+          textAlign: TextAlign.end,
+
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              label: Container (
+                width: double.infinity,
+                child: Text("رقم الهاتف" ,textAlign: TextAlign.end,),
+              ),
+              hintText: "07******"
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+
+              return 'الرجاء ادخال رقم الهاتف ';
+
+            }
+
+            else {
+              if (phone_number.text.length < 10) {
+                return 'يجب ان يتكون رقم الهاتف من 10 خانات ';
+              }
+            }
+          },
+        ),
+      ),
+    );
+  }
+
   Widget button_sign_up() {
     return BlocProvider(
         create: (BuildContext context) => get_data_cubit(LoginInitialdata()),
@@ -38,14 +245,15 @@ class _Sing_UpState extends State<Sing_Up> {
                                   password.text.trim(),
                                   phone_number.text.trim());
                             } else {
-                              Tosta_mes(mess: "كلمة السر غير متطابقة");
+                              Tosta_mes(mess: "كلمة السر غير متطابقة" ,color: Colors.red);
                             }
                           }
                         },
                         child: Text(
-                          "Login",
-                          style: TextStyle(fontSize: 25, color: Colors.white),
+                          "إنشاء حساب",
+                          style: TextStyle(fontSize: 25, color: Colors.white ),
                         ),
+                        color: Color(0xFF3C79F5),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                       ),
@@ -62,32 +270,63 @@ class _Sing_UpState extends State<Sing_Up> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          // backgroundColor: Colors.white,
-          // iconTheme: IconThemeData(color: Colors.black ,size: 25),
-          ),
+      appBar: AppBar(),
       body: Form(
         key: _forKey,
-        child: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  colors: [
+
+                    Color(0xFF3C79F5),
+                    Color(0xFF3C79F5),
+                    Color(0xFF3C79F5),
+                  ]
+              )
+          ),
           child: Column(
-            children: [
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(color: Color(0xFF3C79F5), fontSize: 30),
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 10,),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 50,
-              ),
-              Name(),
-              Email(),
-              Phone(),
-              passowrd(),
-              re_passowrd(),
-              button_sign_up()
+              SizedBox(height: 20),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: 60,),
+
+                          Name(),
+                          Email(),
+                          Phone(),
+                          passowrd(),
+                          re_passowrd(),
+                          SizedBox(height: 40,),
+
+                          button_sign_up(),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -96,148 +335,5 @@ class _Sing_UpState extends State<Sing_Up> {
   }
 }
 
-var name = TextEditingController();
-var email = TextEditingController();
-var password = TextEditingController();
-var phone_number = TextEditingController();
-
-var re_password = TextEditingController();
-var _forKey = GlobalKey<FormState>();
-
-Widget Name() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: name,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: "Name",
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'الرجاء إدخال الاسم ';
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget Email() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: email,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: "Email",
-        ),
-        validator: (value) {
-          RegExp regex = RegExp(r'^(?=.*?[.])(?=.*?[@])(?=.*?[com]).{8,}$');
 
 
-          if (value == null || value.isEmpty) {
-            return 'الرجاء إدخال البريد الإلكتروني ';
-          } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-            return "صيغة البريد الإلكتروني خاظئة";
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget passowrd() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: password,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: "Password",
-        ),
-
-        validator: (value) {
-          //  RegExp regex = RegExp(
-          //     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
-          RegExp capital_char = RegExp(r'^(?=.*?[A-Z])');
-
-          RegExp smal_char = RegExp(r'^(?=.*?[a-z])');
-
-          RegExp spical_char = RegExp(r'^(?=.*?[!@#\$&*~])');
-
-          RegExp number = RegExp(r'^(?=.*?[0-9])');
-
-          var passNonNullValue = value ?? "";
-
-          if (value == null || value.isEmpty) {
-            return 'الرجاء إدخال كلمة المرور ';
-          } 
-          
-          else if (value.length < 7) {
-            return 'كلمة المرور قصيرة ';
-          } else if (!capital_char.hasMatch(passNonNullValue)) {
-            return (" يجب ان تحتوي كلمة المرور على حروف  كبيرة   ");
-          } else if (!smal_char.hasMatch(passNonNullValue)) {
-            return ("يجب ان تحتوي كلمة المرور على حروف صغيرة");
-          } else if (!spical_char.hasMatch(passNonNullValue)) {
-            return ("يجب ان تحتوي كلمة المرور على رموز خاصة");
-          } else if (!number.hasMatch(passNonNullValue)) {
-            return ("يجب ان تحتوي كلمة المرور على ارقام");
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget re_passowrd() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: re_password,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: "Re password",
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'الرجاء ادخال نفس كلمة المرور الموجودة أعلاه';
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget Phone() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        controller: phone_number,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: "Phone",
-          hintText: '07********',
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'الرجاء ادخال رقم الهاتف ';
-          }
-        },
-      ),
-    ),
-  );
-}

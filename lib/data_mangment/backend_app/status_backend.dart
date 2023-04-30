@@ -37,11 +37,18 @@ class Sussess_change_data extends status_get_data{}
 class Error_state_change_data extends status_get_data{}
 
 
+
+
+
 class Loading_send_order extends status_get_data{}
 
 class Sussess_send_order extends status_get_data{}
 
 class Error_state_send_order extends status_get_data{}
+
+
+
+
 
 
 //For Admin
@@ -58,4 +65,27 @@ class Loading_get_Info_order extends status_get_data{}
 class Sussess_get_Info_order_order  extends status_get_data{}
 
 class Error_get_Info_order_order  extends status_get_data{}
+
+
+class Loading_get_list_order extends status_get_data{}
+
+class Sussess_get_list_order  extends status_get_data{}
+
+class Error_get_list_order  extends status_get_data{}
+
+
+
+// For Points
+class Loading_get_points extends status_get_data{}
+
+class Sussess_get_points  extends status_get_data{}
+
+class Error_get_points  extends status_get_data{}
+
+class Loading_change_points extends status_get_data{}
+
+class Sussess_change_points  extends status_get_data{}
+
+class Error_change_points  extends status_get_data{}
+
 

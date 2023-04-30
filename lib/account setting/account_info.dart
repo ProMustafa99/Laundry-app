@@ -1,12 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
-import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class account_info extends StatefulWidget {
@@ -17,18 +14,77 @@ class account_info extends StatefulWidget {
 }
 
 class _account_infoState extends State<account_info> {
-  Object _selected = "d";
+  var fname = TextEditingController();
+  var lname = TextEditingController();
+  var phone = TextEditingController();
+  var _forKey = GlobalKey<FormState>();
 
-  bool vi = false;
+  Widget Fname() {
+
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: TextFormField(
+          controller: fname,
+          maxLength: 20,
+          textAlign: TextAlign.end,
+          decoration: InputDecoration(
+            label: Container (
+              width: double.infinity,
+              child: Text("الإسم" ,textAlign: TextAlign.end,),
+            ),
+            hintText: 'Ali',
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'هذا الحقل مطلوب';
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget Phone() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: TextFormField(
+          keyboardType: TextInputType.phone,
+          maxLength: 10,
+          textAlign: TextAlign.end,
+          controller: phone,
+          decoration: InputDecoration(
+            label: Container (
+              width: double.infinity,
+              child: Text("رقم الهاتف" ,textAlign: TextAlign.end,),
+            ),
+            hintText: '07********',
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'هذا الحقل مطلوب';
+            }
+
+            else {
+              if (phone.text.length <10) {
+                return 'يجب ان يتكون رقم الهاتف من 10 خانات ';
+              }
+            }
+          },
+        ),
+      ),
+    );
+  }
 
   Widget Save_data() {
     return BlocProvider(
-      create: (BuildContext context) => get_data_cubit(Loading_change_data()),
+      create: (BuildContext context) => get_data_cubit(LoginInitialdata()),
       child: BlocConsumer<get_data_cubit, status_get_data>(
         listener: (context, state) {},
         builder: (context, state) {
           return ConditionalBuilder(
-            condition: state is Loading_change_data,
+            condition: state is !Loading_change_data,
             builder: (context) {
               return Container(
                 width: double.infinity,
@@ -43,14 +99,14 @@ class _account_infoState extends State<account_info> {
                   },
                   color: Colors.blue,
                   child: Text(
-                    "حفظ البيانات",
+                    "حفظ التعديلات",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               );
             },
             fallback: (BuildContext context) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             },
           );
         },
@@ -72,7 +128,7 @@ class _account_infoState extends State<account_info> {
 
             return Scaffold(
                 appBar: AppBar(
-                  title: Text("Setting Info"),
+                  title: Text("المعلومات الأساسية"),
                 ),
                 body: Padding(
                     padding: const EdgeInsets.all(15),
@@ -96,47 +152,8 @@ class _account_infoState extends State<account_info> {
                                           children: [
                                             Fname(),
                                             Phone(),
-
-                                            // ignore: prefer_const_constructors
                                             SizedBox(
                                               height: 25,
-                                            ),
-                                            // ignore: prefer_const_constructors
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              // ignore: prefer_const_constructors
-                                              child: Text(
-                                                "Gender (optional)",
-                                                style: TextStyle(
-                                                    color: Color(0xffBDC3C7)),
-                                              ),
-                                            ),
-
-                                            Row(
-                                              children: [
-                                                Radio(
-                                                  value: "d",
-                                                  groupValue: _selected,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      _selected = value!;
-                                                    });
-                                                    print(_selected);
-                                                  },
-                                                ),
-                                                Text("Mail"),
-                                                Radio(
-                                                  value: "Fmail",
-                                                  groupValue: _selected,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      _selected = value!;
-                                                    });
-                                                  },
-                                                ),
-                                                Text("Fmail"),
-                                              ],
                                             ),
 
                                             Save_data(),
@@ -149,73 +166,5 @@ class _account_infoState extends State<account_info> {
   }
 }
 
-var fname = TextEditingController();
-var lname = TextEditingController();
-var phone = TextEditingController();
-var _forKey = GlobalKey<FormState>();
 
-Widget Fname() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: fname,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          labelText: "First name",
-          hintText: 'Mustafa ',
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'هذا الحقل مطلوب';
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget LName() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        controller: lname,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          labelText: "Last name",
-          hintText: 'Mustafa ',
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please Enter  Email';
-          }
-        },
-      ),
-    ),
-  );
-}
-
-Widget Phone() {
-  return Container(
-    child: Padding(
-      padding: EdgeInsets.all(12),
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        maxLength: 10,
-        controller: phone,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          labelText: "Phone Number",
-          hintText: '07********',
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'هذا الحقل مطلوب';
-          }
-        },
-      ),
-    ),
-  );
-}
 

@@ -1,10 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/data_mangment/cubit_app.dart';
+import 'package:flutter_application_1/data_mangment/status_app.dart';
+import 'package:flutter_application_1/model/product_info.dart';
 import 'package:flutter_application_1/order/order_page.dart';
 import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+Map<String, dynamic> payment_details1 = {};
 class Details_dry_clean extends StatefulWidget {
   String name_service;
 
@@ -15,533 +19,235 @@ class Details_dry_clean extends StatefulWidget {
 }
 
 class _Details_dry_cleanState extends State<Details_dry_clean> {
+
   String name_service;
 
   _Details_dry_cleanState(this.name_service);
 
-  int Tshirt = 0;
-  double PrTshirt = 0.5;
-  bool VTshirt = false;
 
-  int Jeans = 0;
-  double PrJeans = 0.5;
-  bool VJeans = false;
 
-  int Jaket = 0;
-  double PrJaket = 1.5;
-  bool VJaket = false;
 
-  int Shoes = 0;
-  double PrShoes = 1.5;
-  bool VShoes = false;
+  int point_dryclean =0 ;
+  int dryclean_pieces =0;
 
-  int Boxer = 0;
-  double PrBoxer = 1.5;
-  bool VBoxer = false;
-
-  int BedCover = 0;
-  double PrBedCover = 2.5;
-  bool VBedCover = false;
-
-  int Total_Type_Widget = 0;
-  double Total_price = 0;
-
-  bool Vbutton = false;
-
-  Color color_button = Colors.blue;
-
-  Map<String, dynamic> myorder = {};
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+
+
+    return   Scaffold(
       appBar: AppBar(
-        title: const Text("Dry Clean "),
+        title: const Text('كوي'),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
+      body:  ListView.builder(
+        itemCount: dataList.length,
+        itemBuilder: (context, index) {
+          Product product = dataList[index];
+          return FadeInDown(
+            delay: const Duration(milliseconds: 630),
 
-
-              // For T-shirt
-              FadeInDown(
-                delay: Duration(milliseconds: 300),
-                child: Container(
-                  child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(15),
-                            child: Image.asset(
-                              "assets/page1/shirt1.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "T-sher",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              Text(
-                                "${PrTshirt} JD ",
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                ),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    onPressed: ()
-                                    {
-                                      setState(()
-                                      {
-                                        Tshirt++;
-                                        Total_Type_Widget = Total_Type_Widget + 1;
-                                        Total_price = Total_price + PrTshirt;
-                                        Vbutton = true;
-                                        VTshirt = true;
-                                        myorder["بلوزة"] =Tshirt;
-                                      });
-                                    },
-                                    icon: Icon(Icons.add, color: Colors.blue,),
-                                  ),
-                                  Text("${Tshirt}", style: TextStyle(fontSize: 20),),
-                                  IconButton(
-                                    onPressed: VTshirt
-                                        ? () {
-                                      setState(()
-                                      {
-                                        Tshirt--;
-                                        Total_Type_Widget = Total_Type_Widget - 1;
-                                        Total_price = Total_price - PrTshirt;
-                                        myorder['بلوزة'] = Tshirt;
-                                        if (Total_price == 0) {
-                                          Vbutton = false;
-                                        }
-
-                                      });
-
-
-                                      if (Tshirt == 0)
-                                      {
-                                        setState(() {
-                                          myorder.remove("بلوزة");
-                                          VTshirt = false;
-                                        });
-                                      }
-
-                                    }
-                                        : null,
-                                    icon: Icon(
-                                      Icons.remove,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      )),
-                ),
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
               ),
+              child: ListTile(
 
-              // For Jeans
-              FadeInDown(
-                delay: Duration(milliseconds: 430),
-                child: Container(
-                  child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(15),
-                            child: Image.asset(
-                              "assets/page1/jeans.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "Jeans",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              Text(
-                                "${PrJeans} JD",
-                                style: TextStyle(color: Colors.blue),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Jeans++;
-                                        Total_Type_Widget = Total_Type_Widget + 1;
-                                        VJeans = true;
-                                        Total_price = Total_price + PrJeans;
-                                        Vbutton = true;
-                                        myorder["بنطلون"] =Jeans;
-                                        print(myorder);
-                                      });
-                                    },
-                                    icon: Icon(Icons.add, color: Colors.blue),
-                                  ),
-                                  Text(
-                                    "${Jeans}",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  IconButton(
-                                    onPressed: VJeans
-                                        ? () {
-                                      setState(() {
-                                        Jeans--;
-                                        Total_Type_Widget = Total_Type_Widget - 1;
-                                        Total_price = Total_price - PrJeans;
-                                        myorder["بنطلون"] =Jeans;
+                title: Row(
+                  children:
+                  [
+                    Container(
+                        margin: const EdgeInsets.all(10),
+                        width: 60,
+                        height: 60,
 
-                                        if (Total_price == 0) {
-                                          Vbutton = false;
-                                        }
-                                      });
+                        child: Row(
+                          children:
+                          [
+                            Image.asset(product.imageUrl),
+                          ],
+                        )
+                    ),
+                    const SizedBox(width: 20,),
 
-                                      if (Jeans == 0) {
-                                        setState(() {
-                                          myorder.remove("بنطلون");
-                                          VJeans = false;
-                                        });
-                                      }
-                                    }
-                                        : null,
-                                    icon: Icon(Icons.remove, color: Colors.blue),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      )),
+                    Column(
+
+                      children: [
+                        Text(product.title , style: const TextStyle(fontWeight: FontWeight.bold ,fontSize: 12),),
+                        const SizedBox(height: 10,),
+                        Text("${product.price.toString()} JD" ,  style: const TextStyle(color: Colors.blue),),
+
+                      ],
+
+                    ),
+                    const Spacer(),
+                    Row(
+                      children:
+                      [
+
+                        IconButton(
+                            onPressed: product.pieces ==0 ? null : (){
+                              setState(() {
+
+                                product.pieces  --;
+                                Total_pieces = Total_pieces-1;
+                                Total_price =Total_price - product.price;
+                                payment_details["${product.title}"] = product.pieces;
+
+                                Total_cost = Total_cost - product.cost_prodect;
+
+                                number_of_pieces["${product.title}"+" - ${product.name_service}"] = product.pieces;
+
+                                if (Total_pieces==0) {
+                                  Total_pieces = 0;
+                                  Vbutton = false;
+                                }
+
+                                if (payment_details["${product.title}"] ==0) {
+
+                                  payment_details.remove("${product.title}");
+                                  number_of_pieces.remove("${product.title}"+" - ${product.name_service}");
+                                  Image_prodect_info.remove("image-${index}");
+
+                                }
+
+                              });
+                            },
+                            icon: const Icon(Icons.remove)
+
+                        ),
+                        Text(" ${product.pieces.toString()}"),
+
+                        IconButton(
+                            onPressed:   (){
+                              setState(() {
+
+                                product.pieces ++;
+                                Total_pieces = Total_pieces+1;
+
+                                dryclean_pieces = dryclean_pieces +1;
+
+                                Total_price =Total_price+ product.price;
+                                Total_cost = Total_cost + product.cost_prodect;
+
+                                number_of_pieces["${product.title}"+" - ${product.name_service}"] = product.pieces;
+                                Image_prodect_info ["image-${product.title}-${index}"] =product.imageUrl;
+
+
+                                Vbutton = true;
+
+                              });
+                            },
+                            icon: const Icon(Icons.add)
+
+                        )
+                      ],
+                    ),
+                  ],
                 ),
+
               ),
-
-              // For jaket
-              FadeInDown(
-                delay: Duration(milliseconds: 530),
-                child: Container(
-                  child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(15),
-                            child: Image.asset(
-                              "assets/page1/jacket.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "Jaket",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              Text(
-                                "${PrJaket} JD",
-                                style: TextStyle(color: Colors.blue),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Jaket++;
-                                        Total_Type_Widget = Total_Type_Widget + 1;
-                                        VJaket = true;
-                                        Total_price = Total_price + PrJaket;
-                                        myorder["جاكيت"] =Jaket;
-                                        Vbutton = true;
-                                      });
-                                    },
-                                    icon: Icon(Icons.add, color: Colors.blue),
-                                  ),
-                                  Text(
-                                    "${Jaket}",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  IconButton(
-                                    onPressed: VJaket
-                                        ? () {
-                                      setState(() {
-                                        Jaket--;
-                                        Total_Type_Widget = Total_Type_Widget - 1;
-                                        Total_price = Total_price - PrJaket;
-                                        myorder["جاكيت"] =Jaket;
-
-                                        if (Total_price == 0) {
-                                          Vbutton = false;
-                                        }
-                                      });
-
-                                      if (Jaket == 0) {
-                                        setState(() {
-                                          myorder.remove("جاكيت");
-                                          VJaket = false;
-                                        });
-                                      }
-                                    }
-                                        : null,
-                                    icon: Icon(Icons.remove, color: Colors.blue),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      )),
-                ),
-              ),
-
-              // For Boxer
-              FadeInDown(
-                delay: Duration(milliseconds: 630),
-                child: Container(
-                  child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(15),
-                            child: Image.asset(
-                              "assets/page1/briefs.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "Boxer",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              Text(
-                                "${PrBoxer} JD",
-                                style: TextStyle(color: Colors.blue),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Boxer++;
-                                        Total_Type_Widget = Total_Type_Widget + 1;
-                                        VBoxer = true;
-                                        Total_price = Total_price + PrBoxer;
-                                        myorder["بوكسر"] =Boxer;
-                                        Vbutton = true;
-                                      });
-                                    },
-                                    icon: Icon(Icons.add, color: Colors.blue),
-                                  ),
-                                  Text(
-                                    "${Boxer}",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  IconButton(
-                                    onPressed: VBoxer
-                                        ? () {
-                                      setState(() {
-                                        Boxer--;
-                                        Total_Type_Widget = Total_Type_Widget - 1;
-                                        myorder["بوكسر"] =Boxer;
-                                        Total_price = Total_price - PrBoxer;
-
-                                        if (Total_price == 0) {
-                                          Vbutton = false;
-                                        }
-                                      });
-
-                                      if (Boxer == 0) {
-                                        setState(() {
-                                          myorder.remove("بوكسر");
-                                          VBoxer = false;
-                                        });
-                                      }
-                                    }
-                                        : null,
-                                    icon: Icon(Icons.remove, color: Colors.blue),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      )),
-                ),
-              ),
-
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomAppBar(
         child: FadeInDown(
           child: Container(
               height: 80.0,
               width: double.maxFinite,
-              color: Color(0xFF3C79F5),
+              color: const Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    child: RaisedButton(
-                      onPressed: Vbutton
-                          ? ()
-                      {
-                        myorder['المجموع'] =Total_price+1;
-                        myorder['السعر'] =Total_price;
-                        myorder["الخدمة "] = " كوي";
-                        myorder ["التوصيل"] = 1;
-                        myorder['عدد القطع'] =Total_Type_Widget;
-                        navigateto_page(context, Order_page(myorder));
-                      }
-                          : null,
-                      padding: const EdgeInsets.all(0.0),
-                      color: color_button,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 20, right: 20, bottom: 20, top: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "${Total_Type_Widget}",
-                              style:
-                              TextStyle(fontSize: 20, color: Colors.white),
+                    padding: const EdgeInsets.only(left: 20, right: 20,top: 15,bottom: 15),
+                    child:BlocProvider(
+                      create: (BuildContext context) => lundary_cubit(Loging_Info_list_purchases()),
+
+                      child: BlocConsumer<lundary_cubit,laundry_app>(
+                        listener: (context, state) {},
+                        builder: (context ,state) {
+                          return  RaisedButton(
+                            onPressed: Vbutton
+                                ? ()
+                            {
+
+                              Points  = (Total_price - Total_cost)*20;
+
+                              payment_details['المجموع'] =double.parse(Total_price.toStringAsFixed(2));
+
+                              payment_details['السعر'] =Total_price.toStringAsFixed(2);
+
+                              payment_details['القطع'] =Total_pieces.toString();
+
+                              payment_details['النقاط']= double.parse(Points.toStringAsFixed(0));
+
+                              lundary_cubit.get(context).shopping_basket(number_of_pieces);
+
+                              navigateto_page(context, Order_page(
+                                  lundary_cubit.get(context).Order_details ,
+                                  Image_prodect_info,
+                                  payment_details
+
+                              ));
+
+                            }
+                                : null,
+                            padding: const EdgeInsets.all(0.0),
+                            color: color_button,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 8 , bottom: 8),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${Total_price.toStringAsFixed(2)} JD",
+                                    style:
+                                    const TextStyle(fontSize: 20, color: Colors.white),
+                                  ),
+
+                                  const Spacer(),
+
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "إطلع على سلة غسيلك",
+                                        style:
+                                        TextStyle(fontSize: 18, color: Colors.white),
+                                      ),
+                                      const SizedBox(
+                                        width: 14,
+                                      ),
+                                      Text(
+                                        "${Total_pieces}",
+                                        style:
+                                        const TextStyle(fontSize: 20, color: Colors.white),
+                                      ),
+                                    ],
+
+                                  ),
+
+
+
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              width: 14,
-                            ),
-                            Text(
-                              "View Order",
-                              style:
-                              TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                            Spacer(),
-                            Text(
-                              "${Total_price} JD",
-                              style:
-                              TextStyle(fontSize: 20, color: Colors.white),
-                            )
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -552,3 +258,25 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
     );
   }
 }
+
+
+//point = المجموع - (مجموع التكاليف )
+//
+
+List<Product> dataList = [
+
+  Product (title: "بلوزة" , price: 0.40 ,pieces: 0, cost_prodect: 0.25 ,name_service: 'كوي',imageUrl: "assets/page1/shirt1.png",),
+
+  Product (title: "جينز" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,name_service: 'كوي',imageUrl: "assets/page1/jeans.png" , ),
+
+  Product (title: "قميص" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,  name_service: 'كوي',imageUrl: "assets/page1/shirt.png" ,),
+
+  Product (title: "عباي/جلباب" , price: 0.65 ,pieces: 0 , cost_prodect: 0.50, name_service: 'كوي', imageUrl: "assets/page1/robe.png" ,),
+
+  Product (title: "فستان" , price: 1.75 ,pieces: 0, cost_prodect: 1.50, name_service: 'كوي',imageUrl: "assets/home_images/dress.png" ,),
+
+  Product (title: "بليزر" , price: 1.00 ,pieces: 0, cost_prodect: 0.75,name_service: 'كوي',imageUrl: "assets/page1/blazer.png" ,),
+
+  Product (title: "بدلة" , price: 1.75 ,pieces: 0,cost_prodect: 1.5, name_service: 'كوي',imageUrl: "assets/page1/suit2.png" ,),
+];
+

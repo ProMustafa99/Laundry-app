@@ -1,13 +1,18 @@
-// ignore_for_file: avoid_single_cascade_in_expression_statements
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/account%20setting/Account_settings.dart';
-import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/account%20setting/help_page.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/order/list_order.dart';
+import 'package:flutter_application_1/point/point.dart';
 import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../data_mangment/backend_app/status_backend.dart';
 
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
@@ -17,7 +22,7 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  // ignore: prefer_final_fields
+
   List<IconData> _icons = [
     Icons.turned_in_not_outlined,
     Icons.account_balance_wallet_outlined,
@@ -34,8 +39,6 @@ class _AccountState extends State<Account> {
       icon = _icons[0];
     } else if (number == 2) {
       icon = _icons[1];
-    } else if (number == 3) {
-      icon = _icons[2];
     } else if (number == 4) {
       icon = _icons[3];
     } else if (number == 5) {
@@ -53,16 +56,11 @@ class _AccountState extends State<Account> {
           }
 
           if (number == 2) {
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.info,
-              animType: AnimType.rightSlide,
-              desc: 'هذه الخدمة تحت التجهيز الأن سوف يتم إطلاقها بعد يومين ',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {},
-            )..show();
+            navigateto_page(context, PointsPage());
+          }
 
-            
+          if (number == 4) {
+            navigateto_page(context, help_page());
           }
 
           if (number == 5) {
@@ -70,11 +68,13 @@ class _AccountState extends State<Account> {
               context: context,
               dialogType: DialogType.info,
               animType: AnimType.rightSlide,
-              desc: 'سيتم تفعيل  خدمة العروض  قريبا ',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {},
-            )..show();
-            //navigateto_page(context , Detailes());
+              desc: 'تحت التطوير',
+              btnOkOnPress: ()
+              {
+
+
+              },
+            ).show();
           }
         },
 
@@ -104,57 +104,83 @@ class _AccountState extends State<Account> {
     );
   }
 
+  String Name  = "";
+
+  Widget UserName () {
+    return BlocProvider(
+      create: (BuildContext context) => get_data_cubit(Loading_get_data_user())..get_data_user(),
+      child:  BlocConsumer<get_data_cubit, status_get_data>(
+        listener: (context, state) {},
+          builder: (context, state) {
+            Name = get_data_cubit.get(context).Info_user.Name;
+            return ConditionalBuilder(
+              condition: state is !Loading_get_data_user,
+
+              builder: (context)  {
+                return
+                  Container(
+                    // set your color
+                    child: Column(
+                      children: [
+                        Row(
+
+                          children: [
+
+                            CircleAvatar(
+                              backgroundColor: Colors.blue,
+                              radius: 20,
+                              child: Text(
+                                "${Name[0]}",
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                            ),
+
+                            SizedBox(width: 15,),
+
+                            Expanded(
+                              child: Text(
+                                "$Name",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+
+                            Spacer(),
+
+                            IconButton(
+                                onPressed: () {
+                                  navigateto_page(context, AccountSettings());
+                                  //AccountSettings
+                                },
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: Colors.white,
+                                ))
+                          ],
+
+                        ),
+                      ],
+                    ),
+                  );
+              },
+              fallback: (context) => Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 120.10, //set your height
         flexibleSpace: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Container(
-              // set your color
-              child: Column(
-                children: [
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-
-                    children: [
-                      // ignore: prefer_const_constructors
-
-                      CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 20,
-                        child: Text(
-                          "M",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-
-
-                      SizedBox(width: 15,),
-
-                      Text(
-                        "Mustafa Salameh",
-                        style: TextStyle(color: Colors.white),
-                      ),
-
-                      Spacer(),
-
-                      IconButton(
-                          onPressed: () {
-                            navigateto_page(context, AccountSettings());
-                            //AccountSettings
-                          },
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            child: UserName()
           ),
         ),
       ),
@@ -182,15 +208,17 @@ class _AccountState extends State<Account> {
                 SizedBox(
                   height: 50,
                 ),
-                Items_account_page(5, "خصومات "),
+
+                Items_account_page(5, "العروض "),
                 const SizedBox(
                   height: 50,
                 ),
-                Items_account_page(4, "خدمة العملاء"),
+                Items_account_page(4, "احصل على مساعدة"),
                 const SizedBox(
                   height: 50,
                 ),
-                Items_account_page(3, "من نحن"),
+
+
 
               ],
             ),
@@ -200,3 +228,8 @@ class _AccountState extends State<Account> {
     );
   }
 }
+
+
+
+
+
