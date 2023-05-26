@@ -30,6 +30,23 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
   int point_dryclean =0 ;
   int dryclean_pieces =0;
 
+  List<Product> dataList = [
+
+    Product (title: "بلوزة" , price: 0.40 ,pieces: 0, cost_prodect: 0.25 ,name_service: 'كوي',imageUrl: "assets/page1/shirt1.png",),
+
+    Product (title: "جينز" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,name_service: 'كوي',imageUrl: "assets/page1/jeans.png" , ),
+
+    Product (title: "قميص" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,  name_service: 'كوي',imageUrl: "assets/page1/shirt.png" ,),
+
+    Product (title: "عباي/جلباب" , price: 0.65 ,pieces: 0 , cost_prodect: 0.50, name_service: 'كوي', imageUrl: "assets/page1/robe.png" ,),
+
+    Product (title: "فستان" , price: 1.75 ,pieces: 0, cost_prodect: 1.50, name_service: 'كوي',imageUrl: "assets/home_images/dress.png" ,),
+
+    Product (title: "بليزر" , price: 1.00 ,pieces: 0, cost_prodect: 0.75,name_service: 'كوي',imageUrl: "assets/page1/blazer.png" ,),
+
+    Product (title: "بدلة" , price: 1.75 ,pieces: 0,cost_prodect: 1.5, name_service: 'كوي',imageUrl: "assets/page1/suit2.png" ,),
+  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -121,7 +138,7 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
 
                                   payment_details.remove("${product.title}");
                                   number_of_pieces.remove("${product.title}"+" - ${product.name_service}");
-                                  Image_prodect_info.remove("image-${index}");
+                                  Image_prodect_info.remove("image-${product.title}-${index}");
 
                                 }
 
@@ -170,7 +187,6 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
           child: Container(
               height: 80.0,
               width: double.maxFinite,
-              color: const Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(
@@ -182,17 +198,16 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
                         listener: (context, state) {},
                         builder: (context ,state) {
                           return  RaisedButton(
-                            onPressed: Vbutton
-                                ? ()
+                            onPressed: Vbutton ? ()
                             {
 
                               Points  = (Total_price - Total_cost)*20;
 
                               payment_details['المجموع'] =double.parse(Total_price.toStringAsFixed(2));
 
-                              payment_details['السعر'] =Total_price.toStringAsFixed(2);
+                              payment_details['السعر'] =double.parse(Total_price.toStringAsFixed(2));
 
-                              payment_details['القطع'] =Total_pieces.toString();
+                              payment_details['القطع'] =double.parse(Total_pieces.toString());
 
                               payment_details['النقاط']= double.parse(Points.toStringAsFixed(0));
 
@@ -260,23 +275,4 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
 }
 
 
-//point = المجموع - (مجموع التكاليف )
-//
-
-List<Product> dataList = [
-
-  Product (title: "بلوزة" , price: 0.40 ,pieces: 0, cost_prodect: 0.25 ,name_service: 'كوي',imageUrl: "assets/page1/shirt1.png",),
-
-  Product (title: "جينز" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,name_service: 'كوي',imageUrl: "assets/page1/jeans.png" , ),
-
-  Product (title: "قميص" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,  name_service: 'كوي',imageUrl: "assets/page1/shirt.png" ,),
-
-  Product (title: "عباي/جلباب" , price: 0.65 ,pieces: 0 , cost_prodect: 0.50, name_service: 'كوي', imageUrl: "assets/page1/robe.png" ,),
-
-  Product (title: "فستان" , price: 1.75 ,pieces: 0, cost_prodect: 1.50, name_service: 'كوي',imageUrl: "assets/home_images/dress.png" ,),
-
-  Product (title: "بليزر" , price: 1.00 ,pieces: 0, cost_prodect: 0.75,name_service: 'كوي',imageUrl: "assets/page1/blazer.png" ,),
-
-  Product (title: "بدلة" , price: 1.75 ,pieces: 0,cost_prodect: 1.5, name_service: 'كوي',imageUrl: "assets/page1/suit2.png" ,),
-];
 

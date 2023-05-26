@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/login/resrpassword.dart';
+import 'package:flutter_application_1/login/sign-up.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +53,7 @@ class _loginpageState extends State<login_page> {
                          },
                          child:Text("تسجيل الدخول" ,style:TextStyle(color: Colors.white) ,) ,
                          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0)),
-                         color :Color(0xFF3C79F5),
+                         color : Color(0xff29B6F6),
                          
 
                        ),
@@ -135,14 +136,14 @@ class _loginpageState extends State<login_page> {
         key: _forKey,
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   colors: [
 
-                    Color(0xFF3C79F5),
-                    Color(0xFF3C79F5),
-                    Color(0xFF3C79F5),
+                    Color(0xff29B6F6),
+                    Color(0xff29B6F6),
+                    Color(0xff29B6F6)
                   ]
               )
           ),
@@ -153,15 +154,15 @@ class _loginpageState extends State<login_page> {
                 padding: EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: const <Widget>[
                     SizedBox(height: 10,),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
                   ),
@@ -178,7 +179,8 @@ class _loginpageState extends State<login_page> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [BoxShadow(
+                                boxShadow: const [
+                                  BoxShadow(
                                     color: Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10)
@@ -188,16 +190,16 @@ class _loginpageState extends State<login_page> {
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
                                       border: Border(bottom: BorderSide(color: Colors.grey))
                                   ),
                                   child: Email(),
                                 ),
 
                                 Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
                                       border: Border(bottom: BorderSide(color: Colors.grey))
                                   ),
                                   child: passowrd(),
@@ -207,7 +209,7 @@ class _loginpageState extends State<login_page> {
                             ),
                           ),
 
-                          SizedBox(height: 40,),
+                          const SizedBox(height: 30,),
 
                           TextButton(
                               onPressed: () {
@@ -217,30 +219,19 @@ class _loginpageState extends State<login_page> {
 
                           ),
 
-                          SizedBox(height: 40,),
+                          TextButton(
+                            onPressed: () {
+                              navigateto_page(context ,Sing_Up());
+                            },
+                            child:  const Text("إنشاء حساب جديد",
+                              style: TextStyle(color: Colors.blue, fontSize: 20),),
+
+                          ),
+
+                          const SizedBox(height: 30,),
 
                           button_login(),
 
-                          SizedBox(height: 40,),
-
-                          // Text(" أو عن طريق", style: TextStyle(color: Colors.grey),),
-                          // SizedBox(height: 30,),
-                          // Center(
-                          //   child: Row (
-                          //     children: [
-                          //       Container(
-                          //         width :50,
-                          //         height: 50,
-                          //         child: Image.asset("assets/home_images/gmail.png"),
-                          //       ),
-                          //
-                          //       SizedBox(width: 15,),
-                          //       Container(
-                          //         child: Text("Gmail"),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // )
 
                         ],
                       ),

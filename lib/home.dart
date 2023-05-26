@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,9 +6,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/Detailes/delails_dryclean.dart';
 import 'package:flutter_application_1/Detailes/details.dart';
 import 'package:flutter_application_1/Detailes/dryclean+washing.dart';
+import 'package:flutter_application_1/account%20setting/Account_settings.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/model/home_page_model.dart';
+import 'package:flutter_application_1/point/point.dart';
 import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'data_mangment/backend_app/status_backend.dart';
 
 int activeindex = 0;
 
@@ -19,101 +26,42 @@ class Home extends StatefulWidget {
 }
 
 class _homeState extends State<Home> {
-  Widget conatant(int numsber_contant, String Name_contant) {
-    String image = "";
-
-    if (numsber_contant == 1) {
-      setState(() {
-        image = "assets/home_images/washing-machine.png";
-      });
-    } 
-    
-    else if (numsber_contant == 2) {
-      setState(() {
-        image = "assets/home_images/ironing.png";
-      });
-    }
-
-    else if (numsber_contant == 3) {
-      setState(() {
-        image = "assets/home_images/clothes-line.png";
-      });
-    }
-    return Padding(
-      padding: const EdgeInsets.only(left: 40, top: 40),
-      child: ClipRRect(
-        child: InkWell(
-
-          onTap: () {
-
-            if (numsber_contant == 1) {
-              navigateto_page(context, Detailes("غسيل"));
-            }
-
-            else if (numsber_contant == 2) {
-              navigateto_page(context, Details_dry_clean("كوي"));
-            }
-
-            else if (numsber_contant == 3) {
-              navigateto_page(context, Details_dry_clean_washing("غسيل وكوي"));
-            }
-          },
-          child: Container(
-            // color: color,
-            child:  Column(
-              children:
-              [
-                Image.asset('${image}' ,width: 90, height: 80,),
-                SizedBox(height: 18,),
-                Text('${Name_contant}', style: TextStyle(fontSize: 17),),
-
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF3C79F5),
-        appBar: AppBar(
-          automaticallyImplyLeading: false, // Set to false to remove back icon
-
-          backgroundColor: const Color(0xFF3C79F5),
-          title: const Text(
-            "الرئيسية",
-            style: TextStyle(color: Colors.white),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 70,
+        flexibleSpace: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.only(right: 30 ,left: 30 , top: 10),
+              child: UserName()
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(25.0),
-              bottomRight: Radius.circular(25.0),
-              topLeft: Radius.circular(15.0),
-              topRight: Radius.circular(15.0)
+      ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final EdgeInsets padding = MediaQuery.of(context).padding;
+          final double availableWidth = constraints.maxWidth;
+          final double availableHeight = constraints.maxHeight - padding.top - padding.bottom;
 
-            ),
-            child:  Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.white,
+
+          return SingleChildScrollView(
+            child: Container(
+              width: availableWidth,
               child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CarouselSlider(
                     items: ItemsSider.map((e) => Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(15),
                       child: Container(
                         width: double.infinity,
                         child: ClipRRect(
                           borderRadius:  BorderRadius.circular(20),
                           child: Image(
-                            image: NetworkImage('${e.image}'),
+                              image:AssetImage('${e.image}')
                           ),
                         ),
                       ),
@@ -131,38 +79,151 @@ class _homeState extends State<Home> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-
+                  const SizedBox(height: 10),
                   bulidIndctor(),
+                  const SizedBox(height: 8),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          navigateto_page(context, Details_dry_clean_washing("غسيل وكوي"));
+                        },
+                        child: Container(
+                           width: MediaQuery.of(context).size.width * 0.4, // Adjust the percentage as needed
+                           height: MediaQuery.of(context).size.height * 0.3, // Adjust the percentage as needed
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/home_images/Group 6.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              navigateto_page(context, Detailes("غسيل"));
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              height:  MediaQuery.of(context).size.height * 0.14,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/home_images/Group 8.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          InkWell(
+                            onTap: () {
+                              navigateto_page(context, Details_dry_clean("كوي"));
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              height:  MediaQuery.of(context).size.height * 0.14,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/home_images/Group 9.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
 
-                  Expanded(
-                    child: Row(
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: BlocProvider(
+                    create: (BuildContext context) => get_data_cubit(Loading_get_points())..get_points(),
+                    child: BlocConsumer<get_data_cubit, status_get_data>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                    double progress = get_data_cubit.get(context).info_points.number / 1000.0;
 
-                      children: [
-                        conatant(1 , "غسيل"),
-                        const SizedBox(width: 25,),
-                        conatant(2, "كوي"),
-                      ],
+                    return  Padding(
+                      padding: EdgeInsets.all(15),
+                    child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 120,
+                    color: Color(0xff499AD4),
+                    child: Padding(
+                    padding: const EdgeInsets.only(left: 35, right: 35 , top: 20 , bottom: 20),
+                    child: Row (
+                    children: [
+
+                    Column(
+                    children: [
+                    Text("نقاطك" ,style: TextStyle(color: Colors.white , fontSize: 25),),
+                    Text("${(get_data_cubit.get(context).info_points.number)}/1000 ",style: TextStyle(color: Colors.white , fontSize: 25),)
+                    ],
                     ),
+
+                    SizedBox(width: 30,),
+                    Container(
+                    decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    // const SizedBox(height: 16.0),
+                    Container(
+                    width: 80.0,
+                    height: 80.0,
+
+                    decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Color(0xff29B6F6), width: 6.0),
+                    ),
+                    child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: CircularProgressIndicator(
+                    value: progress,
+                    strokeWidth: 4.0,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                    ),
+                    )
+                    ],
+                    ),
+                    ),
+
+
+                    ],
+                    ),
+                    ),
+                    ),
+                    );
+                    }),),
                   ),
 
-                  Expanded(
-                    child: Row(
-                      children: [
-                        conatant(3 ,  "كوي+غسيل"),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
-
-          ),
-        ));
+          );
+        },
+      ),
+    );
   }
 }
+
+
+
+
+String Name  = "";
 
 Widget bulidIndctor() {
   return AnimatedSmoothIndicator(
@@ -175,5 +236,69 @@ Widget bulidIndctor() {
         spacing: 5.0 //It determines the distance between the points
 
         ),
+  );
+}
+
+Widget UserName () {
+  return BlocProvider(
+      create: (BuildContext context) => get_data_cubit(Loading_get_data_user())..get_data_user(),
+      child:  BlocConsumer<get_data_cubit, status_get_data>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            Name = get_data_cubit.get(context).Info_user.Name;
+            return ConditionalBuilder(
+              condition: state is !Loading_get_data_user,
+
+              builder: (context)  {
+                return
+                  Container(
+                    child: Column(
+                      children: [
+                        Row(
+
+                          children: [
+
+                            CircleAvatar(
+                              backgroundColor: Color(0xff499AD4),
+                              radius: 22,
+                              child: Text(
+                                "${Name[0].toUpperCase()}",
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                            ),
+
+                            SizedBox(width: 15,),
+
+                            Expanded(
+                              child: Text(
+                                "$Name",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+
+                            Spacer(),
+
+                            IconButton(
+                                onPressed: () {
+                                  navigateto_page(context, AccountSettings());
+                                  //AccountSettings
+                                },
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: Color(0xff499AD4),
+                                ))
+                          ],
+
+                        ),
+                      ],
+                    ),
+                  );
+              },
+              fallback: (context) => Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+      )
   );
 }

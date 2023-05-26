@@ -29,6 +29,26 @@ class _DetailesState extends State<Detailes> {
 
   double sum =0 ;
 
+  List<Product> dataList = [
+
+    Product (title: "بجامة" , price: 0.70 ,pieces: 0, cost_prodect: 0.5 ,name_service: 'غسيل', imageUrl: "assets/page1/pagama.png",),
+
+    Product (title: "بنطلون رياضة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0, name_service: 'غسيل',imageUrl: "assets/page1/sweatpants.png" ,),
+
+    Product (title: "بلوزة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shirt1.png" ,),
+
+    Product (title: "شرط" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shorts.png" ,),
+
+    Product (title: "ملابس داخلية" , price: 0.75 ,cost_prodect: 0.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/underwear.png" ,),
+
+    Product (title: "جاكيت" , price: 1.00 , cost_prodect: 0.75 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/jacket.png" ,),
+
+    Product (title: "حرام" , price: 3 ,cost_prodect: 2.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/bed-sheets.png" ,),
+
+    Product (title: "شرشف" , price: 0.85 , cost_prodect: 0.65 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/blanket.png" ,),
+
+  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -112,9 +132,6 @@ class _DetailesState extends State<Detailes> {
 
                                 Total_price =Total_price - product.price;
 
-
-                                print(Total_cost);
-
                                 Total_cost = Total_cost - product.cost_prodect;
 
                                 print(Total_cost);
@@ -131,7 +148,7 @@ class _DetailesState extends State<Detailes> {
                                 if (payment_details["${product.title}"] ==0) {
                                     payment_details.remove("${product.title}");
                                     number_of_pieces.remove("${product.title}"+" - ${product.name_service}");
-                                    Image_prodect_info.remove("image-${index}");
+                                    Image_prodect_info.remove("image-${product.title}-${index}");
                                 }
 
                               });
@@ -158,8 +175,6 @@ class _DetailesState extends State<Detailes> {
                                       Total_price =Total_price+ product.price;
 
                                       Total_cost = Total_cost + product.cost_prodect;
-
-                                      print(Total_cost);
 
                                       Image_prodect_info ["image-${product.title}-${index}"] =product.imageUrl;
 
@@ -192,7 +207,6 @@ class _DetailesState extends State<Detailes> {
 
               height: 80.0,
               width: double.maxFinite,
-              color: Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(
@@ -214,9 +228,9 @@ class _DetailesState extends State<Detailes> {
 
                               payment_details['المجموع'] =double.parse(Total_price.toStringAsFixed(2));
 
-                              payment_details['السعر'] =Total_price.toStringAsFixed(2);
+                              payment_details['السعر'] =double.parse(Total_price.toStringAsFixed(2));
 
-                              payment_details['القطع'] =Total_pieces.toString();
+                              payment_details['القطع'] =double.parse(Total_pieces.toString());
 
                               payment_details['النقاط']= double.parse(Points.toStringAsFixed(0));
 
@@ -283,25 +297,5 @@ class _DetailesState extends State<Detailes> {
   }
 }
 
-List<Product> dataList = [
 
-  Product (title: "بجامة" , price: 0.70 ,pieces: 0, cost_prodect: 0.5 ,name_service: 'غسيل', imageUrl: "assets/page1/pagama.png",),
-
-  Product (title: "بنطلون رياضة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0, name_service: 'غسيل',imageUrl: "assets/page1/sweatpants.png" ,),
-
-  Product (title: "بلوزة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shirt1.png" ,),
-
-  Product (title: "شرط" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shorts.png" ,),
-
-  Product (title: "ملابس داخلية" , price: 0.75 ,cost_prodect: 0.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/underwear.png" ,),
-
-  Product (title: "جاكيت" , price: 1.00 , cost_prodect: 0.75 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/jacket.png" ,),
-
-  //Product (title: "جوارب" , price: 0.0 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/socks.png" ,),
-
-  Product (title: "حرام" , price: 3 ,cost_prodect: 2.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/bed-sheets.png" ,),
-
-  Product (title: "شرشف" , price: 0.85 , cost_prodect: 0.65 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/blanket.png" ,),
-
-];
 

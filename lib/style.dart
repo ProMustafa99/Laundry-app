@@ -14,19 +14,19 @@ ThemeData light = ThemeData(
   appBarTheme: const AppBarTheme(
       backwardsCompatibility: false,
       systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Color(0xFF3C79F5),
-          statusBarIconBrightness: Brightness.light
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark
       ),
-      backgroundColor: Color(0xFF3C79F5),
+      backgroundColor: Colors.white,
       titleTextStyle: TextStyle(
           // color: Colors.white ,
           fontSize: 20,
           fontWeight: FontWeight.bold),
-      iconTheme: IconThemeData(color: Colors.white ,size: 25),
+      iconTheme: IconThemeData(color: Colors.black ,size: 25),
       elevation: 0.0,
       centerTitle: true
   ),
-  scaffoldBackgroundColor: color_background,
+  scaffoldBackgroundColor: Colors.white,
   
   // ignore: prefer_const_constructors
   bottomNavigationBarTheme:BottomNavigationBarThemeData(

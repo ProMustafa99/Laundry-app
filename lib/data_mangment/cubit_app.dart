@@ -1,15 +1,9 @@
 
 import 'package:app_settings/app_settings.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/account%20setting/Account.dart';
 import 'package:flutter_application_1/data_mangment/status_app.dart';
 import 'package:flutter_application_1/home.dart';
-import 'package:flutter_application_1/layout.dart';
-import 'package:flutter_application_1/model/product_info.dart';
-import 'package:flutter_application_1/order/order_page.dart';
-import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
@@ -21,9 +15,8 @@ class lundary_cubit extends Cubit<laundry_app> {
   int currentIndex = 0;
 
   List<BottomNavigationBarItem> bottomItems = [
-    // ignore: prefer_const_constructors
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.home),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.home),
       label: 'الرئيسية',
     ),
 
@@ -38,17 +31,12 @@ class lundary_cubit extends Cubit<laundry_app> {
 
   List<Widget> screen = [
     const Home(),
-    const Account(),
   ];
 
   void changBottomNavigationBar(int index) {
     currentIndex = index;
     if (index == 1) {
       const Home();
-    }
-
-    if (index == 2) {
-      const Account();
     }
 
     emit(Sussess_Navigation());
@@ -85,38 +73,13 @@ class lundary_cubit extends Cubit<laundry_app> {
     if (per == LocationPermission.whileInUse) {
       if (services == false) {
 
-        // AwesomeDialog(
-        //   context: context,
-        //   dialogType: DialogType.error,
-        //   animType: AnimType.rightSlide,
-        //   desc: ' الرجاء تشغيل الموقع من إعدادت الهاتف',
-        //     btnCancelOnPress: () {
-        //       navigateto_and_push (context ,layout());
-        //     },
-        //
-        //   btnOkOnPress: () {
-        //     AppSettings.openLocationSettings(callback: () {
-        //
-        //     }).then((value) async {
-        //       get_Location_user();
-        //       send_location = true;
-        //
-        //     }).catchError((error) {
-        //
-        //     });
-        //   },
-        //
-        //
-        //
-        // ).show();
-
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
 
-              title: Text("تحذير ",textAlign: TextAlign.center,),
-              content: Text("تعذر تحديد موقعك الحالي الرجاء الذهاب الى الإعدادت وتفعيل الموقع",
+              title: const Text("تحذير ",textAlign: TextAlign.center,),
+              content: const Text("تعذر تحديد موقعك الحالي الرجاء الذهاب الى الإعدادت وتفعيل الموقع",
                 textAlign: TextAlign.center,),
               actions: [
                 TextButton(

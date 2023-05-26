@@ -61,7 +61,6 @@ class _Sing_UpState extends State<Sing_Up> {
           textAlign: TextAlign.end,
 
           controller: email,
-          // ignore: prefer_const_constructors
           decoration: InputDecoration(
               border: OutlineInputBorder(),
               label: Container (
@@ -249,13 +248,13 @@ class _Sing_UpState extends State<Sing_Up> {
                             }
                           }
                         },
-                        child: Text(
+                        color:   Color(0xff29B6F6),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: const Text(
                           "إنشاء حساب",
                           style: TextStyle(fontSize: 25, color: Colors.white ),
                         ),
-                        color: Color(0xFF3C79F5),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
                       ),
                     ),
                   );
@@ -275,14 +274,14 @@ class _Sing_UpState extends State<Sing_Up> {
         key: _forKey,
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   colors: [
 
-                    Color(0xFF3C79F5),
-                    Color(0xFF3C79F5),
-                    Color(0xFF3C79F5),
+                    Color(0xff29B6F6),
+                    Color(0xff29B6F6),
+                    Color(0xff29B6F6),
                   ]
               )
           ),
@@ -293,15 +292,15 @@ class _Sing_UpState extends State<Sing_Up> {
                 padding: EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: const <Widget>[
                     SizedBox(height: 10,),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
                   ),

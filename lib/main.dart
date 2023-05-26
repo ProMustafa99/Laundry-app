@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
-import 'package:flutter_application_1/layout.dart';
+import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/style.dart';
-import 'package:device_preview/device_preview.dart';
-import 'login/login-info.dart';
+import 'login/login-page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,25 +16,23 @@ void main() async {
   Widget Screen;
 
   if (cheeck_id == null) {
-    Screen = login_info();
+    Screen = login_page();
   } else {
-    Screen = layout();
+    Screen = Home();
   }
 
-  runApp(DevicePreview(builder: (context)=>MyApp(Screen = Screen)));
+  runApp(MyApp(Screen = Screen));
 }
 
 class MyApp extends StatelessWidget {
   final stratWidget;
   MyApp(this.stratWidget);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter ',
       theme: light,
       home: stratWidget,
     );

@@ -6,13 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
 import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
-import 'package:flutter_application_1/layout.dart';
-import 'package:flutter_application_1/login/login-info.dart';
+import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/login/login-page.dart';
 import 'package:flutter_application_1/model/info-user.dart';
 import 'package:flutter_application_1/model/point_model.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:crossplat_objectid/crossplat_objectid.dart';
+import 'package:uuid/uuid.dart';
 
 class get_data_cubit extends Cubit<status_get_data> {
   get_data_cubit(super.initialState);
@@ -27,7 +27,7 @@ class get_data_cubit extends Cubit<status_get_data> {
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((value) {
       Cash_Data().Save_Data(key: "user_id", value: value.user!.uid);
-      navigateto_and_push(context, layout());
+      navigateto_and_push(context, Home());
       emit(Sussess_get_data());
     }).catchError((e) {
       emit(Error_state_get_data());
@@ -53,8 +53,7 @@ class get_data_cubit extends Cubit<status_get_data> {
     {
       String id_user = value.user!.uid;
       Information_user(context, name.trim(), email.trim(),id_user, phone);
-      
-      
+
       emit(Sussess_get_data());
     }).catchError((e)
     {
@@ -83,6 +82,7 @@ class get_data_cubit extends Cubit<status_get_data> {
         "status":false,
       }).then((value)  {
         Tosta_mes(mess: 'تم إنشاء حساب جديد ', color: Colors.green);
+        navigateto_and_push(context,login_page());
 
       });
 
@@ -134,7 +134,7 @@ class get_data_cubit extends Cubit<status_get_data> {
       "Phone": New_phone.trim(),
     }).then((value) {
       emit(Sussess_change_data());
-      navigateto_and_push(context, layout());
+      navigateto_and_push(context, Home());
       Tosta_mes(mess: "تم حفظ البيانات ", color: Colors.green);
     }).catchError((e) {
       emit(Error_state_change_data());
@@ -190,7 +190,7 @@ class get_data_cubit extends Cubit<status_get_data> {
       "Email": Email.trim(),
     }).then((value) {
       emit(Sussess_change_data());
-      navigateto_and_push(context, login_info());
+      navigateto_and_push(context, login_page());
       Data.RemoveData();
       Tosta_mes(mess: "تم حفظ البيانات ", color: Colors.green);
     }).catchError((e) {
@@ -210,6 +210,7 @@ class get_data_cubit extends Cubit<status_get_data> {
 
     user.reauthenticateWithCredential(cred).then((value) {
       user.updatePassword(new_password).then((value) {
+        navigateto_and_push(context, login_page());
         emit(Sussess_change_data());
       }).catchError((error)
       {
@@ -226,7 +227,7 @@ class get_data_cubit extends Cubit<status_get_data> {
         desc: 'كلمة المرور القديمة غير صحيحة ',
         btnCancelOnPress: () {},
         btnOkOnPress: () {},
-      )..show();
+      ).show();
 
       print (err.toString());
     });
@@ -252,9 +253,9 @@ class get_data_cubit extends Cubit<status_get_data> {
                 desc: 'تم إرسال رسالة الى بريدك الإلكتروني',
 
                 btnOkOnPress: () {
-                  navigateto_and_push(context ,login_info());
+                  navigateto_and_push(context ,login_page());
                 },
-              )..show();
+              ).show();
 
               emit(Sussess_change_data());
           })
@@ -287,7 +288,9 @@ class get_data_cubit extends Cubit<status_get_data> {
   {
       Data = Cash_Data();
       var cheeck_id = await Data.getData(key: "user_id");
-      ObjectId id_order = new ObjectId();
+      var uuid = Uuid();
+      var orderId = uuid.v4();
+      orderId = orderId.substring(orderId.length -4);
 
       emit(Loading_send_order());
 
@@ -297,7 +300,7 @@ class get_data_cubit extends Cubit<status_get_data> {
 
       Info_user = InfoUserModel.fromJson(value.data()!);
       String Id_user = value.id;
-      var Id_order = id_order;
+      String Id_order = orderId.toString();
 
 
        order_details ["Id_user"] = Id_user;
@@ -390,6 +393,7 @@ class get_data_cubit extends Cubit<status_get_data> {
   PointsModel info_points  = PointsModel(0 , true);
 
   void get_points () async{
+
   Data = Cash_Data();
   var cheeck_id = await Data.getData(key: "user_id");
 
@@ -402,15 +406,11 @@ class get_data_cubit extends Cubit<status_get_data> {
       .get()
       .then((value) {
           info_points =PointsModel.fromJson(value.data()!);
-          print(info_points.number);
-
           emit(Sussess_get_points());
       })
       .catchError((error_points){
 
-        print("*****************************************");
         print(error_points.toString());
-        print("*****************************************");
 
         emit(Error_get_points());
 
@@ -418,30 +418,65 @@ class get_data_cubit extends Cubit<status_get_data> {
 
 }
 
-  void change_value_points (int new_point)async{
+
+  void change_value_points (int new_point , int offer)async{
     Data = Cash_Data();
     var cheeck_id = await Data.getData(key: "user_id");
     emit(Loading_change_points());
-    FirebaseFirestore.instance.collection("user")
-        .doc(cheeck_id)
-        .collection("Points")
-        .doc(cheeck_id).update(
-              {
-                "number":new_point,
-                 "status":true,
-              }
-          )
-        .then((value)  {
 
-              info_points.number = new_point;
-            emit(Sussess_change_points());
+    if (offer > 0) {
+      FirebaseFirestore.instance.collection("user")
+          .doc(cheeck_id)
+          .collection("Points")
+          .doc(cheeck_id).update(
+          {
+            "number":(new_point - offer),
+            "status":true,
+          }
+      )
+          .then((value)  {
 
-          })
-        .catchError((error_update_points){
+        info_points.number = new_point;
 
-          emit(Error_change_points());
+        print("***********************************************");
+        print("Done change point  ${new_point - offer}");
+        print("***********************************************");
+        emit(Sussess_change_points());
 
-          });
+      })
+          .catchError((error_update_points){
+        print("***********************************************");
+        print("can not  change point  because ${error_update_points}");
+        print("***********************************************");
+        emit(Error_change_points());
+
+      });
+
+    }
+
+    else {
+      FirebaseFirestore.instance.collection("user")
+          .doc(cheeck_id)
+          .collection("Points")
+          .doc(cheeck_id).update(
+          {
+            "number":new_point,
+            "status":true,
+          }
+      )
+          .then((value)  {
+
+        info_points.number = new_point;
+        emit(Sussess_change_points());
+
+      })
+          .catchError((error_update_points){
+
+        emit(Error_change_points());
+
+      });
+    }
+
   }
 
 }

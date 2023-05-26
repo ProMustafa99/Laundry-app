@@ -1,9 +1,17 @@
 
+import 'dart:ffi';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Map/Map.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
+import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
+import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/layout.dart';
 import 'package:flutter_application_1/widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class Order_page extends StatefulWidget {
@@ -25,6 +33,12 @@ class _Order_pageState extends State<Order_page> {
   double padding_left_right = 15;
   double padding_top = 10;
 
+  double currentSliderValue = 0;
+  int point = 21;
+  int x=21;
+  double offerValue = 0;
+
+
   Map<String, dynamic> upcoming_orders = {};
 
   Map<String, dynamic> Prodect_image = {};
@@ -37,13 +51,78 @@ class _Order_pageState extends State<Order_page> {
   Widget build(BuildContext context) {
 
     List<String> keys = upcoming_orders.keys.toList();
-    double font_size = 17;
+    double fontSize = 17;
 
 
     List<String> images = [];
+
     Prodect_image.forEach((key, value) {
       images.add(value);
     });
+
+
+    void offer_value(double valueSlider) {
+
+      double offer =  double.parse(Payment_details['السعر']);
+
+      setState(() {
+        valueSlider = valueSlider /100;
+
+      });
+
+      if (valueSlider > offer ) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.rightSlide,
+          desc: 'قيمة الخصم أكبر من قمية الفاتورة',
+          btnOkOnPress: () {},
+        ).show();
+      }
+
+      else {
+        setState(() {
+          offer = offer - valueSlider;
+          offerValue = valueSlider*100;
+          x= x -(valueSlider*100).toInt();
+          if (x < 0 ) {
+            x =0;
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.rightSlide,
+              desc: 'لم يتبقى لك نقاط',
+              btnOkOnPress: () {},
+            ).show();
+          }
+
+          else {
+            Payment_details['السعر'] = offer.toStringAsFixed(2);
+            Payment_details['المجموع'] =  double.parse(offer.toStringAsFixed(2));
+          }
+
+        });
+
+      }
+
+
+    }
+
+    void change_point (double valueSlider) {
+
+      setState(() {
+        offerValue = valueSlider;
+      });
+    }
+
+
+    void we () {
+        setState(() {
+
+          x--;
+
+        });
+    }
 
 
     return Scaffold(
@@ -74,9 +153,9 @@ class _Order_pageState extends State<Order_page> {
               itemCount: keys.length,
               itemBuilder: (BuildContext context, int index) {
 
-                String key_name = keys[index];
+                String keyName = keys[index];
 
-                List<String> parts = key_name.split("-");
+                List<String> parts = keyName.split("-");
 
                 String firstPart = parts[0];
                 String secondPart = parts[1];
@@ -93,20 +172,20 @@ class _Order_pageState extends State<Order_page> {
 
                       Text("${value}"),
 
-                      Spacer(),
+                      const Spacer(),
 
                       Column(
                         children: [
-                          Text("${firstPart}",style: TextStyle(fontSize: 18),),
+                          Text("${firstPart}",style: const TextStyle(fontSize: 18),),
                           Text("${secondPart}"),
-                          Divider(
+                          const Divider(
                             color: Colors.black,
                           ),
                         ],
                       ),
 
 
-                      SizedBox(width: 20,),
+                      const SizedBox(width: 20,),
 
                       Container(
                         width: 50,
@@ -128,120 +207,231 @@ class _Order_pageState extends State<Order_page> {
 
             const Divider(),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 10 , right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children:
-                [
-                    Text("ملخص الدفع " ,style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.right,),
-
-                        SizedBox(height: 15,),
-
-                       Row(
-                    children:
-                    [
-                      Text(Payment_details['القطع'],
-                          style: TextStyle(color: Color(0xff7B7D7D ),fontSize: font_size) ),
-                      Spacer(),
-                      Text("عدد القطع",style: TextStyle(color: Color(0xff7B7D7D ) ,fontSize: font_size)),
-
-                    ],
-                  ),
-
-                       SizedBox(height: 15,),
-
-                       Row(
-                        children:
-                        [
-                          Text(Payment_details['السعر']
-                              ,style: TextStyle(color: Color(0xff7B7D7D )
-                                  ,fontSize: font_size
-                              )),
-                          Spacer(),
-                          Text("المجموع",
-                              style: TextStyle(
-                                  color: Color(0xff7B7D7D )
-                                  ,fontSize: font_size
-
-                              )),
-
-                        ],
-                      ),
-                  SizedBox(height: 15,),
-
-                  Row(
-                    children:
-                    [
-                      //Points.toStringAsFixed(0)
-                      Text("${Payment_details['النقاط'].toStringAsFixed(0)}",
-                          style: TextStyle(
-                              color: Color(0xff7B7D7D ),
-                              fontSize: font_size
-
-                          )),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Icon(Icons.account_balance_wallet ,color: const Color(0xff7B7D7D ),),
-                          SizedBox(width: 8,),
-                          Text("نقاط الطلب",
-                              style: TextStyle(
-                                  color: Color(0xff7B7D7D )
-                                  ,fontSize: font_size
-                              )),
-
-                        ],
-                      )
-
-                    ],
-                  ),
+            BlocProvider(
+              create: (BuildContext context) => get_data_cubit(Loading_get_points())..get_points(),
+              child: BlocConsumer<get_data_cubit , status_get_data>(
+                listener: (context , status) {},
+                builder: (context , status) {
+                   point = get_data_cubit.get(context).info_points.number;
 
 
-                      const SizedBox(height: 15,),
-
-                      Row(
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10 , right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children:
                       [
-                        Text("1" ,style: TextStyle(
-                            color: Color(0xff7B7D7D )
-                            ,fontSize: font_size
-                        )),
-                        const Spacer(),
+                        const Text("ملخص الدفع " ,style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.right,),
+
+                        const SizedBox(height: 15,),
+
                         Row(
-                          children: [
-                            Icon(Icons.monetization_on ,color: Color(0xff7B7D7D ),),
-                            const SizedBox(width: 8,),
-                            Text("رسوم التوصيل",
-                                style: TextStyle(
-                                    color: Color(0xff7B7D7D )
-                                    ,fontSize: font_size
-                                )),
+                          children:
+                          [
+                            Text("${Payment_details['القطع']}",
+                                style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize) ),
+                            const Spacer(),
+                            Text("عدد القطع",style: TextStyle(color: const Color(0xff7B7D7D ) ,fontSize: fontSize)),
 
                           ],
-                        )
+                        ),
 
+                        const SizedBox(height: 15,),
+
+                        Row(
+                          children:
+                          [
+                            Text("${Payment_details['السعر']}",style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize)),
+                            const Spacer(),
+                            Text("المجموع", style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize)),
+
+                          ],
+                        ),
+                        const SizedBox(height: 15,),
+
+                        Row(
+                          children:
+                          [
+                            //Points.toStringAsFixed(0)
+                            Text("${Payment_details['النقاط'].toStringAsFixed(0)}",
+                                style: TextStyle(
+                                    color: const Color(0xff7B7D7D ),
+                                    fontSize: fontSize
+
+                                )),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                const Icon(Icons.account_balance_wallet ,color: Color(0xff7B7D7D ),),
+                                const SizedBox(width: 8,),
+                                Text("نقاط الطلب",
+                                    style: TextStyle(
+                                        color: const Color(0xff7B7D7D )
+                                        ,fontSize: fontSize
+                                    )),
+
+                              ],
+                            )
+
+                          ],
+                        ),
+
+
+                        const SizedBox(height: 15,),
+
+                        Row(
+                          children:
+                          [
+                            Text("1" ,style: TextStyle(
+                                color: const Color(0xff7B7D7D )
+                                ,fontSize: fontSize
+                            )),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                const Icon(Icons.monetization_on ,color: Color(0xff7B7D7D ),),
+                                const SizedBox(width: 8,),
+                                Text("رسوم التوصيل",
+                                    style: TextStyle(
+                                        color: const Color(0xff7B7D7D )
+                                        ,fontSize: fontSize
+                                    )),
+
+                              ],
+                            )
+
+                          ],
+                        ),
+
+                        const SizedBox(height: 15,),
+
+                        Row(
+                          children:
+                          [
+                            Text("${(Payment_details['المجموع']+1)}"
+                              ,style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: fontSize),),
+                            const Spacer(),
+                            Text("قيمة الطلب" ,style: TextStyle(fontWeight: FontWeight.bold,fontSize: fontSize),),
+
+                          ],
+                        ),
+
+                        const SizedBox(height: 15,),
+
+
+                        RaisedButton (
+                          color:  const Color(0xff29B6F6),
+                          child: const Text("استخدم نقاطك " ,style: TextStyle(color: Colors.white),),
+                          onPressed: point > 0 ?() {
+                            showDialog(context: context,
+                                builder: (BuildContext context) {
+
+                                  int increment = 5;
+                                  int steps = (point / increment).round();
+                                  double point2 = point.toDouble();
+
+                                  return AlertDialog(
+                                    title: Column (
+                                      children: [
+                                        const Text("مجموع نقاطك",textAlign: TextAlign.center,),
+                                        Text(" ${point}"),
+                                      ],
+                                    ),
+
+                                    content: StatefulBuilder (
+                                        builder: (BuildContext context, StateSetter setState) {
+                                          return SizedBox(
+                                            width: 150,
+                                            height: 170,
+                                            child: Column (
+                                              children: [
+
+
+                                                Column(
+                                                  children: [
+
+                                                    Text("تستخدم  ${offerValue.toInt()} نقطة ",style: TextStyle(fontSize: 16),),
+
+                                                    Text("عدد النقاط المتبقي ${x}" ,style: TextStyle(fontSize: 16),),
+
+                                                  ],
+                                                ),
+
+                                                const SizedBox(height: 10,),
+
+                                                Slider(
+                                                  value: currentSliderValue,
+                                                  max: point2,
+                                                  divisions: steps,
+                                                  label: currentSliderValue.round().toString(),
+                                                  onChanged: (double value) {
+
+                                                    setState(() {
+                                                      currentSliderValue = value;
+                                                      change_point(currentSliderValue);
+                                                      we();
+                                                    });
+
+                                                  },
+                                                ),
+
+
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text("مقدا الخصم :  ${(currentSliderValue /100).toStringAsFixed(2)}"),
+
+                                              ],
+
+                                            ),
+                                          );
+                                        }
+                                    ),
+
+                                    actions: <Widget>[
+
+                                      FlatButton(
+                                        color: Colors.red,
+                                        child: const Text('إلغاء',style: TextStyle(color: Colors.white),),
+                                        onPressed: () {
+                                         Navigator.of(context).pop();
+                                          // we();
+                                        },
+                                      ),
+
+                                      FlatButton(
+
+                                        color:  const Color(0xff29B6F6),
+                                        child: const Text('حفظ',style: TextStyle(color: Colors.white),),
+                                        onPressed: ()
+                                        {
+
+                                          offer_value(currentSliderValue);
+                                          // we(currentSliderValue);
+
+
+                                        },
+                                      ),
+
+                                    ],
+                                  );
+
+                                });
+
+
+                          } :null,
+                        ),
                       ],
                     ),
+                  );
+                },
 
-                      SizedBox(height: 15,),
-
-                      Row(
-                        children:
-                        [
-                          Text("${(Payment_details['المجموع']+1)}"
-                            ,style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: font_size),),
-                          const Spacer(),
-                          Text("قيمة الطلب" ,style: TextStyle(fontWeight: FontWeight.bold,fontSize: font_size),),
-
-                        ],
-                      )
-                ],
               ),
-            )
+            ),
+
 
           ],
         ),
@@ -262,12 +452,12 @@ class _Order_pageState extends State<Order_page> {
                       child:  RaisedButton(
                         onPressed: ()
                         {
+
                           Payment_details['التوصيل'] = 1;
                           Payment_details['المجموع'] =(Payment_details['المجموع']+1);
                           Payment_details['النقاط'] = (Payment_details['النقاط'].toInt());
 
-                          print(Payment_details['النقاط']);
-                          navigateto_page(context , Map_page(Payment_details ,upcoming_orders));
+                          navigateto_page(context , Map_page(Payment_details ,upcoming_orders ,offerValue.toInt()));
                         },
                         color: Colors.blue,
                         child: const Padding(
@@ -280,14 +470,14 @@ class _Order_pageState extends State<Order_page> {
                       ),
 
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
 
 
                       child:  RaisedButton(
                         onPressed: ()
                         {
-                          navigateto_page(context ,layout());
+                          navigateto_page(context ,const Home());
                         },
                         color: Colors.blue,
                         child: const Padding(
@@ -302,6 +492,8 @@ class _Order_pageState extends State<Order_page> {
                     ),
 
 
+
+
                   ],
                 ),
               ),
@@ -309,7 +501,6 @@ class _Order_pageState extends State<Order_page> {
             ),
           ),
         )
-
 
     );
 

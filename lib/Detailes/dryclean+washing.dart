@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/data_mangment/cubit_app.dart';
 import 'package:flutter_application_1/data_mangment/status_app.dart';
-import 'package:flutter_application_1/model/prodect_card.dart';
 import 'package:flutter_application_1/model/product_info.dart';
 import 'package:flutter_application_1/order/order_page.dart';
 import 'package:flutter_application_1/widget.dart';
@@ -23,7 +22,24 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 
   _Details_dry_washing_cleanState(this.name_service);
 
+  List<Product> dataList = [
 
+    Product (title: "قميص" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/shirt.png", ),
+
+    Product (title: "بلوزة" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/shirt1.png" ,),
+
+    Product (title: "جينز" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0, name_service: 'كوي+غسيل',imageUrl: "assets/page1/jeans.png" ,),
+
+    Product (title: "فستان" , price: 2.75 , cost_prodect: 2.5 , pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/home_images/dress.png" ,),
+
+    Product (title: "عباي/جلباب" , price: 1.05 , cost_prodect: 0.85 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/robe.png" ,),
+
+    Product (title: "بدلة" , price: 2.95 , cost_prodect: 2.75 , pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/suit2.png" ,),
+
+    Product (title: "بليزر" , price: 1.70 , cost_prodect: 1.5 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/suit2.png" ,),
+
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +130,7 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 
                                   payment_details.remove("${product.title}");
                                   number_of_pieces.remove("${product.title}"+" - ${product.name_service}");
-                                  Image_prodect_info.remove("image-${index}");
+                                  Image_prodect_info.remove("image-${product.title}-${index}");
 
                                 }
 
@@ -168,7 +184,6 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
           child: Container(
               height: 80.0,
               width: double.maxFinite,
-              color: const Color(0xFF3C79F5),
               child: Column(
                 children: [
                   Padding(
@@ -189,9 +204,9 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 
                                 payment_details['المجموع'] =double.parse(Total_price.toStringAsFixed(2));
 
-                                payment_details['السعر'] =Total_price.toStringAsFixed(2);
+                                payment_details['السعر'] =double.parse(Total_price.toStringAsFixed(2));
 
-                                payment_details['القطع'] =Total_pieces.toString();
+                                payment_details['القطع'] =double.parse(Total_pieces.toString());
 
                                 payment_details['النقاط']= double.parse(Points.toStringAsFixed(0));
 
@@ -260,24 +275,6 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 
 
 
-List<Product> dataList = [
 
-
-  Product (title: "قميص" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/shirt.png", ),
-
-  Product (title: "بلوزة" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/shirt1.png" ,),
-
-  Product (title: "جينز" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0, name_service: 'كوي+غسيل',imageUrl: "assets/page1/jeans.png" ,),
-
-  Product (title: "فستان" , price: 2.75 , cost_prodect: 2.5 , pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/home_images/dress.png" ,),
-
-  Product (title: "عباي/جلباب" , price: 1.05 , cost_prodect: 0.85 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/robe.png" ,),
-
-  Product (title: "بدلة" , price: 2.95 , cost_prodect: 2.75 , pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/suit2.png" ,),
-
-  Product (title: "بليزر" , price: 1.70 , cost_prodect: 1.5 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/suit2.png" ,),
-
-
-];
 
 

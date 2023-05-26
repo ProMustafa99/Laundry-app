@@ -53,6 +53,7 @@ dependencies:
   shared_preferences: ^2.0.13
   crossplat_objectid: ^3.0.0
   device_preview: ^1.1.0
+  uuid: ^3.0.7
 
 
 
@@ -90,13 +91,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     
-    - assets/home_images/iron1.gif
-    - assets/home_images/washer_ma.gif
-    - assets/home_images/washing-machine.png
-    - assets/home_images/ironing.png
-    - assets/home_images/clothes-line.png
     - assets/home_images/dress.png
-    - assets/home_images/gmail.png
+    - assets/home_images/Group 8.png
+    - assets/home_images/Group 6.png
+    - assets/home_images/Group 9.png
+    - assets/home_images/Rectangle 3.png
+    - assets/home_images/Frame 1.png
 
 
     - assets/page1/shirt1.png
@@ -106,10 +106,6 @@ flutter:
     - assets/page1/bed-sheets.png
     - assets/page1/shoe.png
     - assets/page1/briefs.png
-    - assets/page1/dry-cleaning.png
-    - assets/page1/bar-code.png
-    - assets/page1/qr-code.png
-    - assets/page1/suit.png
     - assets/page1/suit2.png
     - assets/page1/cloth.png
     - assets/page1/blanket.png
@@ -120,12 +116,8 @@ flutter:
     - assets/page1/shorts.png
     - assets/page1/pagama.png
     - assets/page1/underwear.png
-    - assets/page1/telescope.png
 
-    - assets/login/login.jpg
-    - assets/login/facebook.png
-    - assets/login/telephone.png
-    - assets/login/login-page.jpg
+
 
 
 

@@ -6,8 +6,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/account%20setting/account_info.dart';
 import 'package:flutter_application_1/account%20setting/change_email.dart';
 import 'package:flutter_application_1/account%20setting/change_password.dart';
+import 'package:flutter_application_1/account%20setting/help_page.dart';
 import 'package:flutter_application_1/data_mangment/shared_preferances/shared-prferances.dart';
-import 'package:flutter_application_1/login/login-info.dart';
+import 'package:flutter_application_1/login/login-page.dart';
+import 'package:flutter_application_1/order/list_order.dart';
 import 'package:flutter_application_1/widget.dart';
 
 class AccountSettings extends StatefulWidget {
@@ -19,12 +21,65 @@ class AccountSettings extends StatefulWidget {
 
 class _AccountSettingsState extends State<AccountSettings> {
 
+
+  final List<IconData> _icons = [
+    Icons.account_circle,
+    Icons.email,
+    Icons.lock,
+    Icons.shopping_bag,
+    Icons.help_outline,
+    Icons.comment
+  ];
+
+
   Widget Settings(int number, String name) {
+
+
+    IconData icon = Icons.abc;
+
+    switch(number) {
+      case 1: {
+        icon = _icons[0];
+      }
+      break;
+      case 2: {
+        icon = _icons[1];
+      }
+      break;
+
+      case 3: {
+        icon = _icons[2];
+      }
+      break;
+
+      case 4: {
+        icon = _icons[3];
+      }
+      break;
+
+
+      case 5: {
+        icon = _icons[4];
+      }
+      break;
+
+      case 6: {
+        icon = _icons[5];
+      }
+
+      break;
+
+      default: {
+        icon = _icons[0];
+      }
+      break;
+    }
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: InkWell(
         onTap: () {
+
           if (number == 1) {
             navigateto_page(context, account_info());
           }
@@ -36,23 +91,49 @@ class _AccountSettingsState extends State<AccountSettings> {
           if (number == 3) {
             navigateto_page(context, Change_Passowrd());
           }
+
+          if (number == 4) {
+            navigateto_page(context, order_list());
+          }
+
+          if (number == 5) {
+            navigateto_page(context, help_page());
+          }
+
+          if (number == 6) {
+            navigateto_page(context, help_page());
+          }
+
+
         },
         child: Container(
           child: Row(
              mainAxisAlignment: MainAxisAlignment.end,
             children: [
 
-              Icon(
+              const Icon(
                 Icons.arrow_back_ios_new_sharp ,
                 size: 18,
+                color: Color(0xff29B6F6),
               ),
 
               Spacer(),
 
-              Text(
-                "${name}",
-                style: TextStyle(fontSize: 14),
+              Row(
+                children: [
+                  Text(
+                    "${name}",
+                    style: TextStyle(fontSize: 14 ),
+                  ),
+                  SizedBox(width:7,),
+                  Icon(
+                    icon,
+                    size: 20,
+                    color: Color(0xff29B6F6),
+                  ),
+                ],
               ),
+
 
 
               //Spacer(),
@@ -81,9 +162,19 @@ class _AccountSettingsState extends State<AccountSettings> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
+                Settings(4, "طلباتي"),
+                const Divider(),
+
                 Settings(1, "معلومات الحساب"),
                 Settings(2, "تغير البريد الإلكتروني"),
                 Settings(3, "تغير كلمة المرور"),
+
+
+                const Divider(),
+
+                Settings(5, "احصل على مساعدة"),
+                Settings(6, "الإقتراح والشكاوي"),
+
                 const Divider(),
 
                 Row(
@@ -108,7 +199,7 @@ class _AccountSettingsState extends State<AccountSettings> {
                                       desc: 'سيتم تسجيل الخروج من هذا الحساب هل أنت متأكد من هذا  ؟',
                                       btnCancelOnPress: () {},
                                       btnOkOnPress: () {
-                                        navigateto_and_push(context , login_info());
+                                        navigateto_and_push(context , login_page());
                                       },
                                     ).show();
 
@@ -116,10 +207,23 @@ class _AccountSettingsState extends State<AccountSettings> {
 
                                   });
 
-
-
                             },
-                            child: Text("تسجل الخروج" ,textAlign:TextAlign.right ,)
+                            child: Row (
+                              children: const [
+
+
+
+                                Text("تسجل الخروج" ,textAlign:TextAlign.right ,),
+
+                                SizedBox(width:7,),
+
+                                Icon(
+                                  Icons.logout,
+                                  size: 20,
+                                  color: Color(0xff29B6F6),
+                                ),
+                              ],
+                            )
 
                        ),
                     )
