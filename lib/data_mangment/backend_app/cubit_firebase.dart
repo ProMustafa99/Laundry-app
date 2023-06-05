@@ -10,6 +10,7 @@ import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/login/login-page.dart';
 import 'package:flutter_application_1/model/info-user.dart';
 import 'package:flutter_application_1/model/point_model.dart';
+import 'package:flutter_application_1/model/product_info.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -356,7 +357,15 @@ class get_data_cubit extends Cubit<status_get_data> {
             .set(order_details)
             .then((value)
             {
-              print("Done Send data");
+
+              Total_pieces =0;
+              Total_cost =0;
+              Total_price =0;
+
+              number_of_pieces.clear();
+              payment_details.clear();
+              Image_prodect_info.clear();
+
               emit(Sussess_send_order_for_admin());
             })
             .catchError((e){
@@ -438,9 +447,9 @@ class get_data_cubit extends Cubit<status_get_data> {
 
         info_points.number = new_point;
 
-        print("***********************************************");
-        print("Done change point  ${new_point - offer}");
-        print("***********************************************");
+        //Delete all value for orders
+
+
         emit(Sussess_change_points());
 
       })

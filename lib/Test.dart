@@ -8,66 +8,75 @@ class BottomContainer extends StatefulWidget {
 }
 
 class _BottomContainerState extends State<BottomContainer> {
-  bool _isExpanded = false;
-  double _containerHeight = 0;
+
+  int totalPoints = 10;
+  int selectedPoints = 0;
+  int value_offer = 500;
+  int point =200;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-              _containerHeight = _isExpanded ? 200 : 0;
-            });
-          },
-          child: Container(
-            width: double.infinity,
-            height: 50,
-            color: Colors.blue,
-            child: Center(
-              child: Text(
-                'Open Container',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
+    return  Scaffold(
+      appBar: AppBar(),
+      body:RaisedButton(
+        color: const Color(0xff29B6F6),
+        child: const Text(
+          "استخدم نقاطك",
+          style: TextStyle(color: Colors.white),
         ),
+        onPressed: point > 0
+            ? () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return AlertDialog(
+                    title: Text('Replace Points'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
 
-        AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          width: double.infinity,
-          height: _containerHeight,
-          color: Colors.grey[200],
-          child: Column(
-            children: [
-              Text(
-                'Container Content',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Some text can go here.',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+                        SizedBox(height: 16),
+                        Text('Total Points: ${value_offer}'),
+                        SizedBox(height: 16),
+                        Slider(
+                          value: selectedPoints.toDouble(),
+                          min: 0,
+                          max: totalPoints.toDouble(),
+                          onChanged: (double value) {
+                            setState(() {
+                              selectedPoints = value.toInt();
+                            });
+                          },
+                        ),
+                        Text('Selected Points: $selectedPoints'),
+                      ],
+                    ),
+                    actions: [
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            print('Selected Points: $selectedPoints');
+                            print('Remaining Points: ${totalPoints - selectedPoints}');
+                            value_offer = totalPoints - selectedPoints;
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Text('Confirm'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          );
+        }
+            : null,
+      )
+
+
     );
+
   }
 }

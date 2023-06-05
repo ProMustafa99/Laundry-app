@@ -1,6 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/Detailes/delails_dryclean.dart';
@@ -9,17 +8,15 @@ import 'package:flutter_application_1/Detailes/dryclean+washing.dart';
 import 'package:flutter_application_1/account%20setting/Account_settings.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/model/home_page_model.dart';
-import 'package:flutter_application_1/point/point.dart';
+import 'package:flutter_application_1/model/product_info.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import 'data_mangment/backend_app/status_backend.dart';
 
 int activeindex = 0;
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _homeState();
@@ -44,7 +41,6 @@ class _homeState extends State<Home> {
         builder: (BuildContext context, BoxConstraints constraints) {
           final EdgeInsets padding = MediaQuery.of(context).padding;
           final double availableWidth = constraints.maxWidth;
-          final double availableHeight = constraints.maxHeight - padding.top - padding.bottom;
 
 
           return SingleChildScrollView(
@@ -53,6 +49,7 @@ class _homeState extends State<Home> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
                   CarouselSlider(
                     items: ItemsSider.map((e) => Padding(
                       padding: EdgeInsets.all(15),
@@ -152,6 +149,7 @@ class _homeState extends State<Home> {
                     listener: (context, state) {},
                     builder: (context, state) {
                     double progress = get_data_cubit.get(context).info_points.number / 1000.0;
+                    total_point = get_data_cubit.get(context).info_points.number;
 
                     return  Padding(
                       padding: EdgeInsets.all(15),

@@ -33,6 +33,7 @@ double Total_cost =0; // Total cost per piece
 
 double  Total_price =0 ; // Total order
 
+int total_point =0;
 
 bool Vbutton = false;
 
@@ -40,4 +41,7 @@ Color color_button = Colors.blue;
 
 
 double Points =0;
+
+
+
 

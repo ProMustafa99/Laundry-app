@@ -2,14 +2,14 @@
 import 'dart:ffi';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/Add%20new%20products.dart';
 import 'package:flutter_application_1/Map/Map.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/cubit_firebase.dart';
 import 'package:flutter_application_1/data_mangment/backend_app/status_backend.dart';
 import 'package:flutter_application_1/home.dart';
-import 'package:flutter_application_1/layout.dart';
+import 'package:flutter_application_1/model/product_info.dart';
 import 'package:flutter_application_1/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,10 +33,12 @@ class _Order_pageState extends State<Order_page> {
   double padding_left_right = 15;
   double padding_top = 10;
 
-  double currentSliderValue = 0;
-  int point = 21;
-  int x=21;
-  double offerValue = 0;
+  int point = 0;
+  int selectedPoints = 0;
+
+  int offerValue = 0;
+
+  int Remaining_points =total_point;
 
 
   Map<String, dynamic> upcoming_orders = {};
@@ -44,6 +46,35 @@ class _Order_pageState extends State<Order_page> {
   Map<String, dynamic> Prodect_image = {};
 
   Map<String, dynamic> Payment_details = {};
+
+  void Change_bill_value (double value_offer) {
+
+    if (value_offer > Payment_details["السعر"]) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        desc: 'قيمة الخصم تعدت  قيمة الفاتورة',
+        btnOkOnPress: () {},
+      ).show();
+    }
+
+    else {
+
+      setState(() {
+        Remaining_points = Remaining_points - selectedPoints;
+        Payment_details["السعر"] = double.parse((Payment_details["السعر"] - value_offer).toStringAsFixed(2));
+        Payment_details["المجموع"] = Payment_details["السعر"];
+        offerValue = selectedPoints;
+
+        Navigator.of(context).pop();
+
+      });
+
+    }
+
+
+  }
 
   _Order_pageState(this.upcoming_orders , this.Prodect_image , this.Payment_details);
 
@@ -55,74 +86,10 @@ class _Order_pageState extends State<Order_page> {
 
 
     List<String> images = [];
-
     Prodect_image.forEach((key, value) {
       images.add(value);
     });
 
-
-    void offer_value(double valueSlider) {
-
-      double offer =  double.parse(Payment_details['السعر']);
-
-      setState(() {
-        valueSlider = valueSlider /100;
-
-      });
-
-      if (valueSlider > offer ) {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.error,
-          animType: AnimType.rightSlide,
-          desc: 'قيمة الخصم أكبر من قمية الفاتورة',
-          btnOkOnPress: () {},
-        ).show();
-      }
-
-      else {
-        setState(() {
-          offer = offer - valueSlider;
-          offerValue = valueSlider*100;
-          x= x -(valueSlider*100).toInt();
-          if (x < 0 ) {
-            x =0;
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.error,
-              animType: AnimType.rightSlide,
-              desc: 'لم يتبقى لك نقاط',
-              btnOkOnPress: () {},
-            ).show();
-          }
-
-          else {
-            Payment_details['السعر'] = offer.toStringAsFixed(2);
-            Payment_details['المجموع'] =  double.parse(offer.toStringAsFixed(2));
-          }
-
-        });
-
-      }
-
-
-    }
-
-    void change_point (double valueSlider) {
-
-      setState(() {
-        offerValue = valueSlider;
-      });
-    }
-
-
-    void we () {
-        setState(() {
-
-          x--;
-
-        });
-    }
 
 
     return Scaffold(
@@ -214,8 +181,7 @@ class _Order_pageState extends State<Order_page> {
                 builder: (context , status) {
                    point = get_data_cubit.get(context).info_points.number;
 
-
-                  return Padding(
+                    return Padding(
                     padding: const EdgeInsets.only(left: 10 , right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -242,7 +208,7 @@ class _Order_pageState extends State<Order_page> {
                         Row(
                           children:
                           [
-                            Text("${Payment_details['السعر']}",style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize)),
+                            Text("${Payment_details['السعر'].toStringAsFixed(2)}",style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize)),
                             const Spacer(),
                             Text("المجموع", style: TextStyle(color: const Color(0xff7B7D7D ),fontSize: fontSize)),
 
@@ -253,7 +219,6 @@ class _Order_pageState extends State<Order_page> {
                         Row(
                           children:
                           [
-                            //Points.toStringAsFixed(0)
                             Text("${Payment_details['النقاط'].toStringAsFixed(0)}",
                                 style: TextStyle(
                                     color: const Color(0xff7B7D7D ),
@@ -321,109 +286,119 @@ class _Order_pageState extends State<Order_page> {
 
                         const SizedBox(height: 15,),
 
+                        RaisedButton(
+                            color: const Color(0xff29B6F6),
+                            child: const Text(
+                              "استخدم نقاطك",
+                              style: TextStyle(color: Colors.white),
+                            ),
 
-                        RaisedButton (
-                          color:  const Color(0xff29B6F6),
-                          child: const Text("استخدم نقاطك " ,style: TextStyle(color: Colors.white),),
-                          onPressed: point > 0 ?() {
-                            showDialog(context: context,
-                                builder: (BuildContext context) {
+                            onPressed: () {
+                              showDialog ( context: context , builder: (BuildContext context) {
 
-                                  int increment = 5;
-                                  int steps = (point / increment).round();
-                                  double point2 = point.toDouble();
-
-                                  return AlertDialog(
-                                    title: Column (
-                                      children: [
-                                        const Text("مجموع نقاطك",textAlign: TextAlign.center,),
-                                        Text(" ${point}"),
-                                      ],
-                                    ),
-
-                                    content: StatefulBuilder (
-                                        builder: (BuildContext context, StateSetter setState) {
-                                          return SizedBox(
-                                            width: 150,
-                                            height: 170,
-                                            child: Column (
-                                              children: [
+                                return StatefulBuilder (
 
 
-                                                Column(
-                                                  children: [
+                                    builder: (context, setState) {
 
-                                                    Text("تستخدم  ${offerValue.toInt()} نقطة ",style: TextStyle(fontSize: 16),),
+                                      int increment = 5;
+                                      int steps = (Remaining_points / increment).round();
 
-                                                    Text("عدد النقاط المتبقي ${x}" ,style: TextStyle(fontSize: 16),),
-
-                                                  ],
-                                                ),
-
-                                                const SizedBox(height: 10,),
-
-                                                Slider(
-                                                  value: currentSliderValue,
-                                                  max: point2,
-                                                  divisions: steps,
-                                                  label: currentSliderValue.round().toString(),
-                                                  onChanged: (double value) {
-
-                                                    setState(() {
-                                                      currentSliderValue = value;
-                                                      change_point(currentSliderValue);
-                                                      we();
-                                                    });
-
-                                                  },
-                                                ),
+                                      return AlertDialog (
+                                        title: Text('إستبدال النقاط',textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),
+                                        content: Column (
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(height: 16),
 
 
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text("مقدا الخصم :  ${(currentSliderValue /100).toStringAsFixed(2)}"),
+                                            Text("${selectedPoints} تستخدم نقاط " ,style: TextStyle(fontSize: fontSize) ),
 
-                                              ],
+                                            SizedBox(height: 16),
 
+                                            Text("${Remaining_points} من أصل ",style: TextStyle(fontSize: fontSize) ),
+
+                                            SizedBox(height: 16),
+
+                                            Slider(
+                                              value: selectedPoints.toDouble().clamp(0, Remaining_points.toDouble()),
+                                              divisions: steps > 0 ? steps : 1,
+                                              label: selectedPoints.round().toString(),
+                                              min: 0,
+                                              max: Remaining_points > 0 ? Remaining_points.toDouble() : 1,
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  selectedPoints = value.toInt();
+                                                });
+                                              },
                                             ),
-                                          );
-                                        }
-                                    ),
 
-                                    actions: <Widget>[
+                                            Text("مقدا الخصم :  ${(selectedPoints /100).toStringAsFixed(2)}"),
+                                          ],
+                                        ),
 
-                                      FlatButton(
-                                        color: Colors.red,
-                                        child: const Text('إلغاء',style: TextStyle(color: Colors.white),),
-                                        onPressed: () {
-                                         Navigator.of(context).pop();
-                                          // we();
-                                        },
-                                      ),
+                                        actions: [
 
-                                      FlatButton(
+                                           FlatButton(
+                                               color: Colors.red,
+                                                  child: const Text('إلغاء',style: TextStyle(color: Colors.white),),
+                                                     onPressed: () {
+                                                       Navigator.of(context).pop();
+                                                       },
+                                            ),
 
-                                        color:  const Color(0xff29B6F6),
-                                        child: const Text('حفظ',style: TextStyle(color: Colors.white),),
-                                        onPressed: ()
-                                        {
+                                           FlatButton(
+                                            color:  const Color(0xff29B6F6),
+                                            child: const Text('حفظ',style: TextStyle(color: Colors.white),),
+                                            onPressed: () {
+                                              setState(() {
 
-                                          offer_value(currentSliderValue);
-                                          // we(currentSliderValue);
+                                                if (Remaining_points <=0) {
+                                                AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.info,
+                                                animType: AnimType.rightSlide,
+                                                title: 'تحذير ',
+                                                desc: 'لقد نفذت نقاطك',
+                                                btnOkOnPress: () {},
+                                                ).show();
+                                                }
 
+                                                else  if (Remaining_points < selectedPoints) {
+                                                  AwesomeDialog(
+                                                    context: context,
+                                                    dialogType: DialogType.info,
+                                                    animType: AnimType.rightSlide,
+                                                    title: 'قيمة النقاط المستخدمة أكبر من قيمة النقاط المتبقية ',
+                                                    desc: 'يرجى تقليل عدد النقاط المستخدمة لتكون أقل من عدد النقاط المتبقية',
+                                                    btnOkOnPress: () {},
+                                                  ).show();
+                                                }
 
-                                        },
-                                      ),
+                                                else {
 
-                                    ],
-                                  );
+                                                  Change_bill_value (selectedPoints/100);
+                                                }
 
-                                });
+                                              });
+                                            },
+                                          ),
 
+                                        ],
 
-                          } :null,
+                                      );
+
+                                    }
+
+                                );
+
+                              }
+
+                              );
+                            }
+
                         ),
+
                       ],
                     ),
                   );
@@ -447,8 +422,6 @@ class _Order_pageState extends State<Order_page> {
                   children: [
 
                     Container(
-
-
                       child:  RaisedButton(
                         onPressed: ()
                         {
@@ -468,16 +441,15 @@ class _Order_pageState extends State<Order_page> {
                           ),
                         ),
                       ),
-
                     ),
                     const Spacer(),
-                    Container(
 
+                    Container(
 
                       child:  RaisedButton(
                         onPressed: ()
                         {
-                          navigateto_page(context ,const Home());
+                          navigateto_page(context , AddNewProducts());
                         },
                         color: Colors.blue,
                         child: const Padding(

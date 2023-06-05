@@ -29,25 +29,7 @@ class _DetailesState extends State<Detailes> {
 
   double sum =0 ;
 
-  List<Product> dataList = [
 
-    Product (title: "بجامة" , price: 0.70 ,pieces: 0, cost_prodect: 0.5 ,name_service: 'غسيل', imageUrl: "assets/page1/pagama.png",),
-
-    Product (title: "بنطلون رياضة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0, name_service: 'غسيل',imageUrl: "assets/page1/sweatpants.png" ,),
-
-    Product (title: "بلوزة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shirt1.png" ,),
-
-    Product (title: "شرط" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shorts.png" ,),
-
-    Product (title: "ملابس داخلية" , price: 0.75 ,cost_prodect: 0.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/underwear.png" ,),
-
-    Product (title: "جاكيت" , price: 1.00 , cost_prodect: 0.75 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/jacket.png" ,),
-
-    Product (title: "حرام" , price: 3 ,cost_prodect: 2.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/bed-sheets.png" ,),
-
-    Product (title: "شرشف" , price: 0.85 , cost_prodect: 0.65 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/blanket.png" ,),
-
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +40,9 @@ class _DetailesState extends State<Detailes> {
         title: Text('غسيل'),
       ),
       body:  ListView.builder(
-        itemCount: dataList.length,
+        itemCount: dataList_wash.length,
         itemBuilder: (context, index) {
-          Product product = dataList[index];
+          Product product = dataList_wash[index];
 
           return FadeInDown(
             delay: Duration(milliseconds: 330),
@@ -134,8 +116,6 @@ class _DetailesState extends State<Detailes> {
 
                                 Total_cost = Total_cost - product.cost_prodect;
 
-                                print(Total_cost);
-
                                 payment_details["${product.title}"] = product.pieces;
                                 number_of_pieces["${product.title}"+" - ${product.name_service}"] = product.pieces;
 
@@ -180,8 +160,8 @@ class _DetailesState extends State<Detailes> {
 
                                       number_of_pieces["${product.title}"+" - ${product.name_service}"] = product.pieces;
 
-
                                       Vbutton = true;
+
                                     });
                                   },
                                   icon: Icon(Icons.add)
@@ -298,4 +278,22 @@ class _DetailesState extends State<Detailes> {
 }
 
 
+List<Product> dataList_wash = [
 
+  Product (title: "بجامة" , price: 0.70 ,pieces: 0, cost_prodect: 0.5 ,name_service: 'غسيل', imageUrl: "assets/page1/pagama.png",),
+
+  Product (title: "بنطلون رياضة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0, name_service: 'غسيل',imageUrl: "assets/page1/sweatpants.png" ,),
+
+  Product (title: "بلوزة" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shirt1.png" ,),
+
+  Product (title: "شرط" , price: 0.35 , cost_prodect: 0.25 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/shorts.png" ,),
+
+  Product (title: "ملابس داخلية" , price: 0.75 ,cost_prodect: 0.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/underwear.png" ,),
+
+  Product (title: "جاكيت" , price: 1.00 , cost_prodect: 0.75 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/jacket.png" ,),
+
+  Product (title: "حرام" , price: 3 ,cost_prodect: 2.5 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/bed-sheets.png" ,),
+
+  Product (title: "شرشف" , price: 0.85 , cost_prodect: 0.65 ,pieces: 0,name_service: 'غسيل',imageUrl: "assets/page1/blanket.png" ,),
+
+];

@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data_mangment/status_app.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class lundary_cubit extends Cubit<laundry_app> {
@@ -30,13 +32,13 @@ class lundary_cubit extends Cubit<laundry_app> {
   ];
 
   List<Widget> screen = [
-    const Home(),
+     Home(),
   ];
 
   void changBottomNavigationBar(int index) {
     currentIndex = index;
     if (index == 1) {
-      const Home();
+       Home();
     }
 
     emit(Sussess_Navigation());
@@ -51,6 +53,8 @@ class lundary_cubit extends Cubit<laundry_app> {
 
   var lat = 0.0;
   var lon;
+
+
 
   bool send_location = false;
 
@@ -111,6 +115,7 @@ class lundary_cubit extends Cubit<laundry_app> {
 
       else {
         get_Location_user();
+
       }
     }
   }

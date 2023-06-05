@@ -22,24 +22,6 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 
   _Details_dry_washing_cleanState(this.name_service);
 
-  List<Product> dataList = [
-
-    Product (title: "قميص" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/shirt.png", ),
-
-    Product (title: "بلوزة" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/shirt1.png" ,),
-
-    Product (title: "جينز" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0, name_service: 'كوي+غسيل',imageUrl: "assets/page1/jeans.png" ,),
-
-    Product (title: "فستان" , price: 2.75 , cost_prodect: 2.5 , pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/home_images/dress.png" ,),
-
-    Product (title: "عباي/جلباب" , price: 1.05 , cost_prodect: 0.85 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/robe.png" ,),
-
-    Product (title: "بدلة" , price: 2.95 , cost_prodect: 2.75 , pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/suit2.png" ,),
-
-    Product (title: "بليزر" , price: 1.70 , cost_prodect: 1.5 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/suit2.png" ,),
-
-
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +30,9 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
         title: const Text('غسيل و كوي'),
       ),
       body:  ListView.builder(
-        itemCount: dataList.length,
+        itemCount: dataList_dryclean_washing.length,
         itemBuilder: (context, index) {
-          Product product = dataList[index];
+          Product product = dataList_dryclean_washing[index];
 
           return FadeInDown(
             delay: const Duration(milliseconds: 630),
@@ -274,7 +256,24 @@ class _Details_dry_washing_cleanState extends State<Details_dry_clean_washing> {
 }
 
 
+List<Product> dataList_dryclean_washing = [
 
+  Product (title: "قميص" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/shirt.png", ),
+
+  Product (title: "بلوزة" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/shirt1.png" ,),
+
+  Product (title: "جينز" , price: 0.70 , cost_prodect: 0.50 ,pieces: 0, name_service: 'كوي+غسيل',imageUrl: "assets/page1/jeans.png" ,),
+
+  Product (title: "فستان" , price: 2.75 , cost_prodect: 2.5 , pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/home_images/dress.png" ,),
+
+  Product (title: "عباي/جلباب" , price: 1.05 , cost_prodect: 0.85 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/robe.png" ,),
+
+  Product (title: "بدلة" , price: 2.95 , cost_prodect: 2.75 , pieces: 0,name_service: 'كوي+غسيل' ,imageUrl: "assets/page1/suit2.png" ,),
+
+  Product (title: "بليزر" , price: 1.70 , cost_prodect: 1.5 ,pieces: 0,name_service: 'كوي+غسيل',imageUrl: "assets/page1/suit2.png" ,),
+
+
+];
 
 
 

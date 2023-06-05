@@ -30,22 +30,6 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
   int point_dryclean =0 ;
   int dryclean_pieces =0;
 
-  List<Product> dataList = [
-
-    Product (title: "بلوزة" , price: 0.40 ,pieces: 0, cost_prodect: 0.25 ,name_service: 'كوي',imageUrl: "assets/page1/shirt1.png",),
-
-    Product (title: "جينز" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,name_service: 'كوي',imageUrl: "assets/page1/jeans.png" , ),
-
-    Product (title: "قميص" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,  name_service: 'كوي',imageUrl: "assets/page1/shirt.png" ,),
-
-    Product (title: "عباي/جلباب" , price: 0.65 ,pieces: 0 , cost_prodect: 0.50, name_service: 'كوي', imageUrl: "assets/page1/robe.png" ,),
-
-    Product (title: "فستان" , price: 1.75 ,pieces: 0, cost_prodect: 1.50, name_service: 'كوي',imageUrl: "assets/home_images/dress.png" ,),
-
-    Product (title: "بليزر" , price: 1.00 ,pieces: 0, cost_prodect: 0.75,name_service: 'كوي',imageUrl: "assets/page1/blazer.png" ,),
-
-    Product (title: "بدلة" , price: 1.75 ,pieces: 0,cost_prodect: 1.5, name_service: 'كوي',imageUrl: "assets/page1/suit2.png" ,),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +41,9 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
         title: const Text('كوي'),
       ),
       body:  ListView.builder(
-        itemCount: dataList.length,
+        itemCount: dataList_dryclean.length,
         itemBuilder: (context, index) {
-          Product product = dataList[index];
+          Product product = dataList_dryclean[index];
           return FadeInDown(
             delay: const Duration(milliseconds: 630),
 
@@ -276,3 +260,19 @@ class _Details_dry_cleanState extends State<Details_dry_clean> {
 
 
 
+List<Product> dataList_dryclean = [
+
+  Product (title: "بلوزة" , price: 0.40 ,pieces: 0, cost_prodect: 0.25 ,name_service: 'كوي',imageUrl: "assets/page1/shirt1.png",),
+
+  Product (title: "جينز" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,name_service: 'كوي',imageUrl: "assets/page1/jeans.png" , ),
+
+  Product (title: "قميص" , price: 0.40 ,pieces: 0, cost_prodect: 0.25,  name_service: 'كوي',imageUrl: "assets/page1/shirt.png" ,),
+
+  Product (title: "عباي/جلباب" , price: 0.65 ,pieces: 0 , cost_prodect: 0.50, name_service: 'كوي', imageUrl: "assets/page1/robe.png" ,),
+
+  Product (title: "فستان" , price: 1.75 ,pieces: 0, cost_prodect: 1.50, name_service: 'كوي',imageUrl: "assets/home_images/dress.png" ,),
+
+  Product (title: "بليزر" , price: 1.00 ,pieces: 0, cost_prodect: 0.75,name_service: 'كوي',imageUrl: "assets/page1/blazer.png" ,),
+
+  Product (title: "بدلة" , price: 1.75 ,pieces: 0,cost_prodect: 1.5, name_service: 'كوي',imageUrl: "assets/page1/suit2.png" ,),
+];
